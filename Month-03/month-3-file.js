@@ -1,0 +1,1610 @@
+// ============================================================
+// 90-DAY JAVASCRIPT ALGORITHM CHALLENGE
+// MONTH 3 — Linked Lists, Trees, Hash Maps & Dynamic Programming
+// Days 61–90 | Difficulty: Medium
+// ============================================================
+// HOW TO USE:
+//   1. Read the problem description and hint for the day
+//   2. Write your solution inside the starter function
+//   3. Run with: node month3.js
+//   4. Bring anything that doesn't click to chat
+// ============================================================
+
+// ── Shared Node Definitions ─────────────────────────────────
+
+class ListNode {
+  constructor(val = 0, next = null) {
+    this.val = val;
+    this.next = next;
+  }
+}
+
+class TreeNode {
+  constructor(val = 0, left = null, right = null) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+const toList = (arr) => {
+  let dummy = new ListNode(0);
+  let cur = dummy;
+  for (const val of arr) {
+    cur.next = new ListNode(val);
+    cur = cur.next;
+  }
+  return dummy.next;
+};
+
+const toArray = (head) => {
+  const result = [];
+  while (head) {
+    result.push(head.val);
+    head = head.next;
+  }
+  return result;
+};
+
+const toTree = (arr) => {
+  if (!arr.length || arr[0] === null) return null;
+  const root = new TreeNode(arr[0]);
+  const queue = [root];
+  let i = 1;
+  while (queue.length && i < arr.length) {
+    const node = queue.shift();
+    if (arr[i] !== null) {
+      node.left = new TreeNode(arr[i]);
+      queue.push(node.left);
+    }
+    i++;
+    if (i < arr.length && arr[i] !== null) {
+      node.right = new TreeNode(arr[i]);
+      queue.push(node.right);
+    }
+    i++;
+  }
+  return root;
+};
+
+// ════════════════════════════════════════════════════════════
+//  WEEK 9 — Linked Lists (Days 61–67)
+//
+//  Thread: Builds the complete linked list toolkit.
+//    Day 61 → detect a loop (fast/slow pointer)
+//    Day 62 → find the middle (fast/slow pointer)
+//    Day 63 → digit-by-digit traversal with carry
+//    Day 64 → split into two chains, reconnect
+//    Day 65 → rewire groups of adjacent nodes
+//    Day 66 → find the new head after rotation
+//    Day 67 → deep clone with non-linear references
+// ════════════════════════════════════════════════════════════
+
+// ────────────────────────────────────────────────────────────
+// Day 61 — Loop Detector (Easy)
+// Topic: Floyd's Cycle Detection (Fast & Slow Pointer)
+// Builds On: Day 49 (two pointers with a gap) — now the gap closes if a loop exists
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A process monitor that checks whether a background job
+  has entered an infinite loop — if its execution trace
+  ever revisits a previous state, it's cycling.
+
+Problem:
+  Given the head of a linked list, determine if the list
+  has a cycle in it. A cycle means some node's next pointer
+  points back to a previous node. Return true if a cycle
+  exists, false otherwise.
+
+Example:
+  Input:  3→2→0→-4 (tail points back to node at index 1)
+  Output: true
+
+  Input:  1→2 (tail points back to node at index 0)
+  Output: true
+
+  Input:  1 (no cycle)
+  Output: false
+
+Constraints:
+  - 0 <= list length <= 10000
+  - -100000 <= Node.val <= 100000
+
+Hint:
+  Two pointers: slow moves one step at a time, fast moves
+  two steps. If they ever point to the same node, there's
+  a cycle — fast caught up to slow by lapping it.
+  If fast reaches null (end of list), no cycle exists.
+  Why does this work? In a cycle, fast gains on slow by 1
+  step each iteration — they must eventually meet.
+*/
+
+const loopDetector = (head) => {
+  // your solution here
+};
+
+// Build a cyclic list manually for testing
+const buildCyclic = (arr, pos) => {
+  const nodes = arr.map((v) => new ListNode(v));
+  for (let i = 0; i < nodes.length - 1; i++) nodes[i].next = nodes[i + 1];
+  if (pos >= 0) nodes[nodes.length - 1].next = nodes[pos];
+  return nodes[0];
+};
+
+console.log(loopDetector(buildCyclic([3, 2, 0, -4], 1))); // true
+console.log(loopDetector(buildCyclic([1, 2], 0))); // true
+console.log(loopDetector(toList([1]))); // false
+
+// ────────────────────────────────────────────────────────────
+// Day 62 — Find the Middle (Easy)
+// Topic: Fast & Slow Pointer — Midpoint
+// Builds On: Day 61 (fast/slow pointer) — same two pointers, different goal
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A media player that needs to find the exact midpoint of
+  a dynamically loaded playlist — without counting total
+  tracks first — to start buffering from the center.
+
+Problem:
+  Given the head of a singly linked list, return the middle
+  node. If the list has two middle nodes (even length),
+  return the second one.
+
+Example:
+  Input:  1→2→3→4→5
+  Output: node 3 (value 3)
+
+  Input:  1→2→3→4→5→6
+  Output: node 4 (value 4) — second of two middles
+
+Constraints:
+  - 1 <= list length <= 100
+
+Hint:
+  Same setup as Day 61: slow moves one step, fast moves two.
+  When fast reaches null or the last node, slow is at the
+  middle. Trace through a 5-node list by hand to convince
+  yourself where slow lands when fast stops.
+*/
+
+const findMiddle = (head) => {
+  // your solution here
+};
+
+console.log(findMiddle(toList([1, 2, 3, 4, 5]))?.val); // 3
+console.log(findMiddle(toList([1, 2, 3, 4, 5, 6]))?.val); // 4
+console.log(findMiddle(toList([1]))?.val); // 1
+
+// ────────────────────────────────────────────────────────────
+// Day 63 — Big Number Add (Medium)
+// Topic: Parallel List Traversal + Carry Logic
+// Builds On: Day 4 (carry logic) + Day 34 (parallel list traversal)
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A big-number calculator that handles integers too large
+  to fit in a standard 64-bit number — each digit is
+  stored as a node in a linked list for arbitrary precision.
+
+Problem:
+  You are given two non-empty linked lists representing
+  two non-negative integers. The digits are stored in
+  reverse order (least significant digit first), and each
+  node contains a single digit. Add the two numbers and
+  return the sum as a linked list in the same format.
+
+Example:
+  Input:  l1 = 2→4→3 (represents 342)
+          l2 = 5→6→4 (represents 465)
+  Output: 7→0→8        (represents 807)
+  Why:    342 + 465 = 807
+
+  Input:  l1 = 0, l2 = 0
+  Output: 0
+
+  Input:  l1 = 9→9→9→9
+          l2 = 9→9→9
+  Output: 8→9→9→0→1   (9999 + 999 = 10998)
+
+Constraints:
+  - 1 <= each list length <= 100
+  - 0 <= Node.val <= 9
+  - No leading zeros except the number 0 itself
+
+Hint:
+  Walk both lists simultaneously. At each step: add the
+  two digit values plus any carry from the previous step.
+  Create a new node with (sum % 10). The new carry is
+  Math.floor(sum / 10). Use a dummy head node for clean
+  result list construction. After both lists are exhausted,
+  check if carry is still 1 — you may need one more node.
+*/
+
+const bigNumberAdd = (l1, l2) => {
+  // your solution here
+};
+
+console.log(toArray(bigNumberAdd(toList([2, 4, 3]), toList([5, 6, 4])))); // [7,0,8]
+console.log(toArray(bigNumberAdd(toList([0]), toList([0])))); // [0]
+console.log(toArray(bigNumberAdd(toList([9, 9, 9, 9]), toList([9, 9, 9])))); // [8,9,9,0,1]
+
+// ────────────────────────────────────────────────────────────
+// Day 64 — Split and Regroup (Medium)
+// Topic: Dual-Chain Linked List Restructuring
+// Builds On: Day 51 (odd/even chain) — more deliberate pointer rewiring
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A task priority manager that must separate high-priority
+  (odd-indexed) jobs from standard (even-indexed) ones —
+  keeping original relative order within each group —
+  then run all high-priority jobs first.
+
+Problem:
+  Given the head of a singly linked list, group all nodes
+  with odd indices first, followed by even-indexed nodes.
+  The first node has index 1 (odd), the second has index 2
+  (even), etc. Do this in O(1) extra space and O(n) time.
+
+Example:
+  Input:  1→2→3→4→5
+  Output: 1→3→5→2→4
+
+  Input:  2→1→3→5→6→4→7
+  Output: 2→3→6→7→1→5→4
+
+Constraints:
+  - 0 <= list length <= 10000
+  - -1000000 <= Node.val <= 1000000
+
+Hint:
+  Two pointers: one tracking the tail of the odd chain,
+  one tracking the tail of the even chain. Also save the
+  head of the even chain for reconnection at the end.
+  Alternate: odd.next = even.next, advance odd.
+             even.next = odd.next, advance even.
+  When done, connect odd.next to the saved even head.
+  Watch for null checks — lists may have 0, 1, or 2 nodes.
+*/
+
+const splitAndRegroup = (head) => {
+  // your solution here
+};
+
+console.log(toArray(splitAndRegroup(toList([1, 2, 3, 4, 5])))); // [1,3,5,2,4]
+console.log(toArray(splitAndRegroup(toList([2, 1, 3, 5, 6, 4, 7])))); // [2,3,6,7,1,5,4]
+console.log(toArray(splitAndRegroup(toList([])))); // []
+
+// ────────────────────────────────────────────────────────────
+// Day 65 — Pair Swap (Medium)
+// Topic: Group Pointer Rewiring with Dummy Head
+// Builds On: Day 64 (rewiring) — now rewiring in chunks of 2
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A card game engine that swaps adjacent card pairs in a
+  player's hand after each round — without changing the
+  actual card values, only their positions in the chain.
+
+Problem:
+  Given the head of a linked list, swap every two adjacent
+  nodes and return the head. You must swap the nodes
+  themselves (not just values).
+
+Example:
+  Input:  1→2→3→4
+  Output: 2→1→4→3
+
+  Input:  1→2→3
+  Output: 2→1→3
+
+  Input:  1
+  Output: 1
+
+Constraints:
+  - 0 <= list length <= 100
+  - 0 <= Node.val <= 100
+
+Hint:
+  Use a dummy head to avoid special-casing the first pair.
+  Set a pointer prev = dummy. While prev.next and prev.next.next exist:
+    first = prev.next
+    second = prev.next.next
+    Rewire: prev.next = second
+            first.next = second.next
+            second.next = first
+    Advance prev = first (which is now the second in position)
+  Four pointer assignments per pair — trace it by hand once.
+*/
+
+const pairSwap = (head) => {
+  // your solution here
+};
+
+console.log(toArray(pairSwap(toList([1, 2, 3, 4])))); // [2,1,4,3]
+console.log(toArray(pairSwap(toList([1, 2, 3])))); // [2,1,3]
+console.log(toArray(pairSwap(toList([1])))); // [1]
+
+// ────────────────────────────────────────────────────────────
+// Day 66 — Rotate Chain (Medium)
+// Topic: Find Tail + Break at New Head
+// Builds On: Day 62 (finding a position) + Day 61 (cycle awareness)
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A round-robin scheduler that rotates a circular task
+  queue by k positions — the kth task from the end becomes
+  the new first task.
+
+Problem:
+  Given the head of a linked list and an integer k, rotate
+  the list to the right by k places.
+
+Example:
+  Input:  1→2→3→4→5, k = 2
+  Output: 4→5→1→2→3
+  Why:    Rotate right twice: last 2 nodes move to front.
+
+  Input:  0→1→2, k = 4
+  Output: 2→0→1
+  Why:    k=4 on length 3 is same as k=1 (4 % 3 = 1).
+
+Constraints:
+  - 0 <= list length <= 500
+  - -100 <= Node.val <= 100
+  - 0 <= k <= 2,000,000,000
+
+Hint:
+  Step 1: Find the length and tail node in one pass.
+  Step 2: k = k % length (handles k larger than list).
+          If k === 0, return head unchanged.
+  Step 3: Connect tail to head — temporarily form a cycle.
+  Step 4: Walk to position (length - k - 1).
+          That node's next is the new head. Break the cycle there.
+*/
+
+const rotateChain = (head, k) => {
+  // your solution here
+};
+
+console.log(toArray(rotateChain(toList([1, 2, 3, 4, 5]), 2))); // [4,5,1,2,3]
+console.log(toArray(rotateChain(toList([0, 1, 2]), 4))); // [2,0,1]
+console.log(toArray(rotateChain(toList([1]), 0))); // [1]
+
+// ────────────────────────────────────────────────────────────
+// Day 67 — Deep Clone (Medium)
+// Topic: Hash Map + Two-Pass Linked List Clone
+// Builds On: Day 15 (hash map for index mapping) — applied to node references
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A document editor that deep-copies a threaded comment
+  chain where each comment also has a "related comment"
+  pointer that can reference any other comment — not just
+  the next one.
+
+Problem:
+  A linked list is given where each node has two pointers:
+  next (to the next node) and random (to any node in the
+  list, or null). Return a deep copy of the list — all new
+  nodes, with next and random pointers correctly wired.
+
+Example:
+  Input:  [[7,null],[13,0],[11,4],[10,2],[1,0]]
+          (each pair is [val, index of random pointer])
+  Output: A deep copy with the same structure.
+
+Constraints:
+  - 0 <= list length <= 1000
+  - -10000 <= Node.val <= 10000
+  - random is null or points to a node in the list
+
+Hint:
+  Pass 1: Walk the original list. For each node, create a
+  new node with the same value and store it in a Map:
+  originalNode → newNode. Do not wire pointers yet.
+
+  Pass 2: Walk the original list again. For each node,
+  use the Map to set:
+    newNode.next = map.get(original.next)
+    newNode.random = map.get(original.random)
+  The Map gives you O(1) access to the corresponding new
+  node for any original node reference.
+*/
+
+class RandomNode {
+  constructor(val = 0, next = null, random = null) {
+    this.val = val;
+    this.next = next;
+    this.random = random;
+  }
+}
+
+const deepClone = (head) => {
+  // your solution here
+};
+
+// Manual test — build a small random-pointer list
+const n1 = new RandomNode(1);
+const n2 = new RandomNode(2);
+n1.next = n2;
+n1.random = n2;
+n2.random = n1;
+const cloned = deepClone(n1);
+console.log(cloned !== n1); // true (different objects)
+console.log(cloned.val === n1.val); // true
+console.log(cloned.random !== n1.random); // true (deep copy, not reference)
+
+// ════════════════════════════════════════════════════════════
+//  WEEK 10 — Trees (Days 68–74)
+//
+//  Thread: Builds the complete binary tree toolkit.
+//    Day 68 → DFS traversal (inorder)
+//    Day 69 → mirror/symmetry check
+//    Day 70 → BFS level-by-level (queue)
+//    Day 71 → BST validation with min/max bounds
+//    Day 72 → capture the last node at each BFS level
+//    Day 73 → DFS backtracking for all root-to-leaf paths
+//    Day 74 → BST properties for efficient LCA search
+// ════════════════════════════════════════════════════════════
+
+// ────────────────────────────────────────────────────────────
+// Day 68 — Inorder Walk (Easy)
+// Topic: DFS Tree Traversal
+// Builds On: Day 36 (tree recursion) — now collecting values in a specific order
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A file explorer that lists all files in a directory tree
+  in alphabetical order. In a Binary Search Tree (BST),
+  inorder traversal visits nodes in sorted order.
+
+Problem:
+  Given the root of a binary tree, return the inorder
+  traversal of its node values.
+  Inorder = left subtree → root → right subtree.
+
+Example:
+  Input:  [1, null, 2, null, null, 3]  (1 with right child 2, 2 with left child 3)
+          1
+           \
+            2
+           /
+          3
+  Output: [1, 3, 2]
+
+  Input:  [1, 2, 3, 4, 5]
+  Output: [4, 2, 5, 1, 3]
+
+Constraints:
+  - 0 <= number of nodes <= 100
+  - -100 <= Node.val <= 100
+
+Hint:
+  Recursive: call inorder on left child, push root.val,
+  call inorder on right child. Pass a result array down
+  or return and concatenate. Two or three lines.
+  Iterative: use an explicit stack to simulate the call
+  stack. Push left nodes until null, then pop, collect,
+  go right. Try both — the iterative reveals what
+  recursion is doing under the hood.
+*/
+
+const inorderWalk = (root) => {
+  // your solution here
+};
+
+console.log(JSON.stringify(inorderWalk(toTree([1, null, 2, 3])))); // [1,3,2]
+console.log(JSON.stringify(inorderWalk(toTree([1, 2, 3, 4, 5])))); // [4,2,5,1,3]
+console.log(JSON.stringify(inorderWalk(null))); // []
+
+// ────────────────────────────────────────────────────────────
+// Day 69 — Mirror Check (Easy)
+// Topic: Simultaneous DFS on Two Subtrees
+// Builds On: Day 68 (DFS) — now you traverse two branches at the same time
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A UI layout validator checking whether a component tree
+  renders symmetrically across a central axis — useful for
+  detecting layout bugs in mirrored dashboard panels.
+
+Problem:
+  Given the root of a binary tree, check whether it is a
+  mirror of itself (i.e., symmetric around its center).
+
+Example:
+  Input:
+         1
+        / \
+       2   2
+      / \ / \
+     3  4 4  3
+  Output: true
+
+  Input:
+       1
+      / \
+     2   2
+      \   \
+       3   3
+  Output: false
+
+Constraints:
+  - 1 <= number of nodes <= 1000
+  - -100 <= Node.val <= 100
+
+Hint:
+  Write a helper: isMirror(left, right).
+  Two subtrees are mirrors if:
+    - Both are null (base: symmetric)
+    - Both are non-null AND left.val === right.val
+      AND isMirror(left.left, right.right)   (outer pair)
+      AND isMirror(left.right, right.left)   (inner pair)
+  Call isMirror(root.left, root.right) from the main function.
+*/
+
+const mirrorCheck = (root) => {
+  // your solution here
+};
+
+console.log(mirrorCheck(toTree([1, 2, 2, 3, 4, 4, 3]))); // true
+console.log(mirrorCheck(toTree([1, 2, 2, null, 3, null, 3]))); // false
+console.log(mirrorCheck(toTree([1]))); // true
+
+// ────────────────────────────────────────────────────────────
+// Day 70 — Floor by Floor (Medium)
+// Topic: BFS with a Queue
+// Builds On: Day 36/68 (tree traversal) — now level-by-level instead of depth-first
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  An org chart tool printing all employees level by level —
+  the CEO first, then all direct reports, then their reports —
+  for a hierarchical overview display.
+
+Problem:
+  Given the root of a binary tree, return the level order
+  traversal of its nodes' values — from left to right,
+  level by level — as an array of arrays.
+
+Example:
+  Input:  [3, 9, 20, null, null, 15, 7]
+  Output: [[3], [9, 20], [15, 7]]
+
+  Input:  [1]
+  Output: [[1]]
+
+Constraints:
+  - 0 <= number of nodes <= 2000
+  - -1000 <= Node.val <= 1000
+
+Hint:
+  BFS uses a queue (array). Start with [root] in the queue.
+  Each iteration: capture the current queue length — that's
+  how many nodes are on this level. Process exactly that many,
+  collect their values, push their children for the next level.
+  The level-size snapshot is the key to separating levels.
+*/
+
+const floorByFloor = (root) => {
+  // your solution here
+};
+
+console.log(
+  JSON.stringify(floorByFloor(toTree([3, 9, 20, null, null, 15, 7]))),
+); // [[3],[9,20],[15,7]]
+console.log(JSON.stringify(floorByFloor(toTree([1])))); // [[1]]
+console.log(JSON.stringify(floorByFloor(null))); // []
+
+// ────────────────────────────────────────────────────────────
+// Day 71 — Valid BST (Medium)
+// Topic: DFS with Min/Max Bounds
+// Builds On: Day 68/70 (tree traversal) — now carrying constraints down the tree
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A configuration management tool validating that a
+  hierarchical settings tree maintains correct priority
+  ordering at every level — not just between parent and
+  direct child, but throughout the entire subtree.
+
+Problem:
+  Given the root of a binary tree, determine if it is a
+  valid Binary Search Tree (BST). A valid BST requires:
+  - Left subtree contains only nodes with values less than the node.
+  - Right subtree contains only nodes with values greater.
+  - Both subtrees must also be valid BSTs.
+
+Example:
+  Input:  [2, 1, 3]
+  Output: true
+
+  Input:  [5, 1, 4, null, null, 3, 6]
+  Output: false
+  Why:    Node 4 is in the right subtree of 5, but 4 < 5 — invalid.
+
+Constraints:
+  - 1 <= number of nodes <= 10000
+  - -2^31 <= Node.val <= 2^31 - 1
+
+Hint:
+  Comparing each node only to its direct parent is not enough
+  (a node deep in the right subtree must be greater than ALL
+  its ancestors, not just its parent).
+  Pass min and max bounds down recursively:
+    Going left: new max = current node's value
+    Going right: new min = current node's value
+  Base case: null node is always valid.
+  Use -Infinity and Infinity as starting bounds.
+*/
+
+const validBST = (root) => {
+  // your solution here
+};
+
+console.log(validBST(toTree([2, 1, 3]))); // true
+console.log(validBST(toTree([5, 1, 4, null, null, 3, 6]))); // false
+console.log(validBST(toTree([2, 2, 2]))); // false
+
+// ────────────────────────────────────────────────────────────
+// Day 72 — Right Side View (Medium)
+// Topic: BFS — Capture Last Node Per Level
+// Builds On: Day 70 (BFS level order) — one small addition: capture the last of each level
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A business reporting tool that shows only the rightmost
+  data point at each depth level of a decision tree —
+  giving a condensed side-profile view of the hierarchy.
+
+Problem:
+  Given the root of a binary tree, imagine standing on the
+  right side and looking left. Return the values of the
+  nodes you can see, ordered from top to bottom.
+
+Example:
+  Input:  [1, 2, 3, null, 5, null, 4]
+  Output: [1, 3, 4]
+
+  Input:  [1, null, 3]
+  Output: [1, 3]
+
+Constraints:
+  - 0 <= number of nodes <= 100
+  - -100 <= Node.val <= 100
+
+Hint:
+  Direct extension of Day 70. Level order BFS, same queue
+  pattern. The only change: after processing all nodes in
+  a level, record the LAST value collected from that level.
+  That's the rightmost visible node. One extra line vs Day 70.
+*/
+
+const rightSideView = (root) => {
+  // your solution here
+};
+
+console.log(JSON.stringify(rightSideView(toTree([1, 2, 3, null, 5, null, 4])))); // [1,3,4]
+console.log(JSON.stringify(rightSideView(toTree([1, null, 3])))); // [1,3]
+console.log(JSON.stringify(rightSideView(null))); // []
+
+// ────────────────────────────────────────────────────────────
+// Day 73 — All Root Paths (Medium)
+// Topic: DFS Backtracking
+// Builds On: Day 68 (DFS) — now tracking the full path and backtracking on return
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A route planning app that finds every possible path from
+  a starting city to a destination where the cumulative
+  distance equals exactly a target — useful for
+  multi-stop trip planning.
+
+Problem:
+  Given the root of a binary tree and an integer targetSum,
+  return all root-to-leaf paths where the sum of node
+  values along the path equals targetSum. Each path is
+  returned as an array of node values.
+
+Example:
+  Input:  root = [5,4,8,11,null,13,4,7,2,null,null,5,1]
+          targetSum = 22
+  Output: [[5,4,11,2],[5,8,4,5]]
+
+Constraints:
+  - 0 <= number of nodes <= 5000
+  - -1000 <= Node.val <= 1000
+  - -1000 <= targetSum <= 1000
+
+Hint:
+  DFS with a current path array and remaining sum.
+  At each node: push node.val to path, subtract from remaining.
+  If it's a leaf (no children) and remaining === 0: save a
+  copy of path to results.
+  Recurse into left and right children.
+  After both recursive calls: pop node.val from path.
+  This undo step is backtracking — the path reflects only
+  the current branch being explored.
+*/
+
+const allRootPaths = (root, targetSum) => {
+  // your solution here
+};
+
+const tree73 = toTree([5, 4, 8, 11, null, 13, 4, 7, 2, null, null, 5, 1]);
+console.log(JSON.stringify(allRootPaths(tree73, 22))); // [[5,4,11,2],[5,8,4,5]]
+console.log(JSON.stringify(allRootPaths(toTree([1, 2, 3]), 5))); // []
+
+// ────────────────────────────────────────────────────────────
+// Day 74 — Common Manager (Medium)
+// Topic: BST Properties for Efficient LCA
+// Builds On: Day 71 (BST validation with bounds) — now USE the BST property for navigation
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  An org chart tool finding the lowest-level manager who
+  has authority over two specific employees — the most
+  relevant shared supervisor rather than going all the way
+  to the CEO.
+
+Problem:
+  Given a BST and two node values p and q, find their
+  lowest common ancestor (LCA) — the deepest node that
+  has both p and q as descendants (a node can be a
+  descendant of itself).
+
+Example:
+  Input:  root = [6,2,8,0,4,7,9,null,null,3,5], p=2, q=8
+  Output: 6
+
+  Input:  same tree, p=2, q=4
+  Output: 2
+  Why:    2 is an ancestor of 4. The LCA is 2 itself.
+
+Constraints:
+  - 2 <= number of nodes <= 100000
+  - -1000000000 <= Node.val <= 1000000000
+  - p and q exist in the tree and p !== q
+
+Hint:
+  This is where BST properties make a hard problem easy.
+  At the current node:
+    - If BOTH p and q are less than current.val → LCA is in left subtree
+    - If BOTH are greater → LCA is in right subtree
+    - Otherwise (they split, or one equals current) → current IS the LCA
+  No need to explore both sides. One direction per step.
+*/
+
+const commonManager = (root, p, q) => {
+  // your solution here (p and q are values, not nodes)
+};
+
+const tree74 = toTree([6, 2, 8, 0, 4, 7, 9, null, null, 3, 5]);
+console.log(commonManager(tree74, 2, 8)); // 6
+console.log(commonManager(tree74, 2, 4)); // 2
+console.log(commonManager(tree74, 0, 5)); // 2
+
+// ════════════════════════════════════════════════════════════
+//  WEEK 11 — Hash Maps Advanced (Days 75–81)
+//
+//  Thread: Month 1 hash maps at scale and in combination.
+//    Day 75 → hash map keyed by sorted string
+//    Day 76 → frequency map + bucket sort for top-K
+//    Day 77 → prefix sum stored in hash map
+//    Day 78 → hash Set for consecutive sequence detection
+//    Day 79 → matrix serialization into map keys
+//    Day 80 → prefix sum + modulo stored in map
+//    Day 81 → sliding window + distinct count in map
+// ════════════════════════════════════════════════════════════
+
+// ────────────────────────────────────────────────────────────
+// Day 75 — Anagram Groups (Medium)
+// Topic: Hash Map Keyed by Sorted String
+// Builds On: Day 10 (anagram detection) — now grouping many at once
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A plagiarism detection tool grouping submitted essays
+  that use the exact same word set in different orders —
+  a strong signal of content reuse.
+
+Problem:
+  Given an array of strings, group the anagrams together
+  and return them as an array of arrays. Order of groups
+  and order within groups does not matter.
+
+Example:
+  Input:  ["eat","tea","tan","ate","nat","bat"]
+  Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+  Input:  [""]
+  Output: [[""]]
+
+Constraints:
+  - 1 <= strs.length <= 10000
+  - 0 <= strs[i].length <= 100
+  - strs[i] consists of lowercase English letters
+
+Hint:
+  Two strings are anagrams if their sorted characters are
+  identical. So the sorted version of each string is a
+  perfect hash map key. Build a Map where each key maps
+  to an array of strings that share that sorted form.
+  One pass: sort each string, use as key, push original
+  string into the key's array.
+*/
+
+const anagramGroups = (strs) => {
+  // your solution here
+};
+
+const result75 = anagramGroups(["eat", "tea", "tan", "ate", "nat", "bat"]);
+console.log(result75.length); // 3 groups
+console.log(result75.some((g) => g.includes("bat") && g.length === 1)); // true
+
+// ────────────────────────────────────────────────────────────
+// Day 76 — Top K Frequent (Medium)
+// Topic: Frequency Map + Bucket Sort
+// Builds On: Day 18 (frequency map) + Day 38 (bucket thinking)
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A social media trending engine surfacing the K most
+  mentioned hashtags in the past hour from a stream of
+  millions of posts.
+
+Problem:
+  Given an integer array and an integer k, return the k
+  most frequently occurring elements. Order of result
+  does not matter.
+
+Example:
+  Input:  nums = [1, 1, 1, 2, 2, 3], k = 2
+  Output: [1, 2]
+
+  Input:  nums = [1], k = 1
+  Output: [1]
+
+Constraints:
+  - 1 <= nums.length <= 100000
+  - k is always valid (1 <= k <= number of unique elements)
+  - The answer is unique (no ties at position k)
+
+Hint:
+  Step 1: Build a frequency map (number → count).
+  Step 2 (efficient): Bucket sort — create an array of
+  n+1 buckets indexed by frequency. Push each number into
+  its frequency bucket. Walk buckets from highest frequency
+  down, collecting numbers until you have k. O(n) total.
+  Step 2 (simpler): Sort unique numbers by frequency desc,
+  take first k. O(n log n) but valid and clean.
+  Implement the sort version first, then try buckets.
+*/
+
+const topKFrequent = (nums, k) => {
+  // your solution here
+};
+
+console.log(JSON.stringify(topKFrequent([1, 1, 1, 2, 2, 3], 2))); // [1,2]
+console.log(JSON.stringify(topKFrequent([1], 1))); // [1]
+
+// ────────────────────────────────────────────────────────────
+// Day 77 — Sum to K (Medium)
+// Topic: Prefix Sum Stored in Hash Map
+// Builds On: Day 2 (prefix sum concept) + Day 15 (complement lookup)
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A financial audit system counting how many consecutive
+  date ranges within a fiscal year show a net cash flow
+  of exactly K — identifying recurring balance patterns.
+
+Problem:
+  Given an integer array and an integer k, return the
+  total number of subarrays whose elements sum to k.
+
+Example:
+  Input:  nums = [1, 1, 1], k = 2
+  Output: 2
+  Why:    [1,1] at index 0-1 and [1,1] at index 1-2.
+
+  Input:  nums = [1, 2, 3], k = 3
+  Output: 2
+  Why:    [3] and [1,2]
+
+Constraints:
+  - 1 <= nums.length <= 20000
+  - -1000 <= nums[i] <= 1000
+  - -1000000000 <= k <= 1000000000
+
+Hint:
+  Prefix sum insight: if prefixSum[j] - prefixSum[i] === k,
+  the subarray from i+1 to j sums to k.
+  Equivalently: we want prefixSum[j] - k to exist as a
+  previous prefix sum.
+  Walk the array, maintain a running prefix sum, and store
+  prefix sums in a Map (prefixSum → how many times seen).
+  Initialize the map with {0: 1} (empty prefix).
+  At each step: count += map.get(currentSum - k) || 0.
+  Then increment map[currentSum].
+*/
+
+const sumToK = (nums, k) => {
+  // your solution here
+};
+
+console.log(sumToK([1, 1, 1], 2)); // 2
+console.log(sumToK([1, 2, 3], 3)); // 2
+console.log(sumToK([1], 0)); // 0
+
+// ────────────────────────────────────────────────────────────
+// Day 78 — Longest Consecutive Run (Medium)
+// Topic: Hash Set + Sequence Building
+// Builds On: Day 16 (Set for existence) + Day 24 (streak counting)
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A streaming platform finding the longest uninterrupted
+  run of episode numbers a user has watched — to recommend
+  the next unwatched episode in sequence.
+
+Problem:
+  Given an unsorted integer array, find the length of the
+  longest consecutive elements sequence. Must run in O(n).
+
+Example:
+  Input:  [100, 4, 200, 1, 3, 2]
+  Output: 4
+  Why:    [1, 2, 3, 4] is the longest consecutive sequence.
+
+  Input:  [0, 3, 7, 2, 5, 8, 4, 6, 0, 1]
+  Output: 9
+
+Constraints:
+  - 0 <= nums.length <= 100000
+  - -1000000000 <= nums[i] <= 1000000000
+
+Hint:
+  Put all numbers in a Set (O(1) lookup). For each number n,
+  only start counting a sequence if n-1 is NOT in the Set —
+  that confirms n is the start of a sequence (not the middle).
+  From n, count forward (n+1, n+2, ...) as long as each
+  next value exists in the Set. This is O(n) overall
+  because each number is visited at most twice.
+*/
+
+const longestConsecutiveRun = (nums) => {
+  // your solution here
+};
+
+console.log(longestConsecutiveRun([100, 4, 200, 1, 3, 2])); // 4
+console.log(longestConsecutiveRun([0, 3, 7, 2, 5, 8, 4, 6, 0, 1])); // 9
+console.log(longestConsecutiveRun([])); // 0
+
+// ────────────────────────────────────────────────────────────
+// Day 79 — Row Column Match (Medium)
+// Topic: Matrix Serialization + Hash Map
+// Builds On: Day 29 (serialize to string) + Day 10 (frequency map)
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A spreadsheet quality tool that flags rows and columns
+  containing identical data sequences — indicating
+  potential duplicated or transposed data entry errors.
+
+Problem:
+  Given an n x n integer matrix grid, return the number
+  of pairs (r, c) where row r and column c contain the
+  same sequence of values.
+
+Example:
+  Input:  [[3,2,1],[1,7,6],[2,7,7]]
+  Output: 1
+  Why:    Row 0 [3,2,1] matches Column 2 [1,6,7]? 
+          Let's check: Row 2 = [2,7,7], Col 1 = [2,7,7]. Match!
+
+  Input:  [[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]
+  Output: 3
+
+Constraints:
+  - n === grid.length === grid[i].length
+  - 1 <= n <= 200
+  - 1 <= grid[i][j] <= 100000
+
+Hint:
+  Serialize each row as a comma-joined string, store in a
+  Map (string → count). Then serialize each column the
+  same way and look it up in the Map. For each column
+  match found, add the count (there may be multiple
+  matching rows). The serialization approach avoids
+  any nested comparison loops.
+*/
+
+const rowColumnMatch = (grid) => {
+  // your solution here
+};
+
+console.log(
+  rowColumnMatch([
+    [3, 2, 1],
+    [1, 7, 6],
+    [2, 7, 7],
+  ]),
+); // 1
+console.log(
+  rowColumnMatch([
+    [3, 1, 2, 2],
+    [1, 4, 4, 5],
+    [2, 4, 2, 2],
+    [2, 4, 2, 2],
+  ]),
+); // 3
+
+// ────────────────────────────────────────────────────────────
+// Day 80 — Divisible Range (Medium)
+// Topic: Prefix Sum + Modulo + Hash Map
+// Builds On: Day 77 (prefix sum in map) — now checking for equal remainders
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A payroll system checking whether any consecutive range
+  of daily wages sums to an exact multiple of the weekly
+  pay period — to flag potential rounding or batch errors.
+
+Problem:
+  Given an integer array nums and an integer k, return true
+  if nums has a continuous subarray of size at least 2 whose
+  elements sum to a multiple of k (i.e., sum % k === 0).
+
+Example:
+  Input:  nums = [23, 2, 4, 6, 7], k = 6
+  Output: true
+  Why:    [2, 4] sums to 6 (length 2, multiple of 6).
+
+  Input:  nums = [23, 2, 6, 4, 7], k = 13
+  Output: false
+
+Constraints:
+  - 1 <= nums.length <= 100000
+  - 0 <= nums[i] <= 1000000000
+  - 0 <= k <= 1000000000
+
+Hint:
+  Key insight: if two prefix sums have the same remainder
+  mod k, the subarray between them is divisible by k.
+  Store (remainder → first index where seen) in a Map.
+  Initialize with {0: -1} (empty prefix at index -1).
+  At each index i: compute currentSum % k. If this remainder
+  was seen before at index j, and (i - j) >= 2, return true.
+  Only store the FIRST occurrence (so the gap stays maximal).
+*/
+
+const divisibleRange = (nums, k) => {
+  // your solution here
+};
+
+console.log(divisibleRange([23, 2, 4, 6, 7], 6)); // true
+console.log(divisibleRange([23, 2, 6, 4, 7], 13)); // false
+console.log(divisibleRange([23, 2, 4, 6, 6], 7)); // true
+
+// ────────────────────────────────────────────────────────────
+// Day 81 — K Distinct Window (Medium)
+// Topic: Sliding Window + Distinct Count in Map
+// Builds On: Day 57 (two-basket sliding window) — generalized to K distinct
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A language analysis tool finding the longest passage
+  of text that uses at most K unique characters —
+  useful for detecting writing style patterns or
+  simplifying text for readability scoring.
+
+Problem:
+  Given a string s and an integer k, return the length of
+  the longest substring that contains at most k distinct
+  characters. If k >= s.length, return s.length.
+
+Example:
+  Input:  s = "eceba", k = 2
+  Output: 3
+  Why:    "ece" has 2 distinct characters and length 3.
+
+  Input:  s = "aa", k = 1
+  Output: 2
+
+Constraints:
+  - 1 <= s.length <= 50000
+  - 0 <= k <= 50
+
+Hint:
+  Direct generalization of Day 57 (two baskets = k=2).
+  Sliding window with a Map tracking character frequency.
+  Expand right freely. When Map.size > k, shrink from left:
+  decrement the count of s[left], if it hits 0 delete it
+  from the Map (so size accurately reflects distinct count).
+  Track max window length.
+*/
+
+const kDistinctWindow = (s, k) => {
+  // your solution here
+};
+
+console.log(kDistinctWindow("eceba", 2)); // 3
+console.log(kDistinctWindow("aa", 1)); // 2
+console.log(kDistinctWindow("a", 0)); // 0
+
+// ════════════════════════════════════════════════════════════
+//  WEEK 12 — Dynamic Programming Introduction (Days 82–90)
+//
+//  Thread: DP builds from what you already know.
+//    Day 82 → 1D DP bottom-up (two variables)
+//    Day 83 → 1D DP, adjacent constraint
+//    Day 84 → 1D DP / greedy with a reachability check
+//    Day 85 → 2D DP grid, two directions
+//    Day 86 → 1D DP with inner loop (unbounded knapsack)
+//    Day 87 → 2D DP on two strings
+//    Day 88 → 1D DP tracking two state variables (min + max)
+//    Day 89 → 1D DP on string with position validity check
+//    Day 90 → 1D DP with inner word-boundary scan
+// ════════════════════════════════════════════════════════════
+
+// ────────────────────────────────────────────────────────────
+// Day 82 — Cheapest Path Up (Easy)
+// Topic: Bottom-Up DP with Two Variables
+// Builds On: Day 33 (climbing stairs) — same shape, now with costs
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A delivery route optimizer finding the minimum cost
+  path through a sequence of stops where you can skip
+  one stop at a time — each stop has a toll fee.
+
+Problem:
+  You are given an integer array cost where cost[i] is the
+  cost of the ith step. Once you pay the cost, you can
+  climb 1 or 2 steps. You can start from index 0 or 1.
+  Return the minimum cost to reach the top of the staircase
+  (past the last element).
+
+Example:
+  Input:  [10, 15, 20]
+  Output: 15
+  Why:    Start at index 1 (cost 15), jump 2 → top. Total: 15.
+
+  Input:  [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]
+  Output: 6
+
+Constraints:
+  - 2 <= cost.length <= 1000
+  - 0 <= cost[i] <= 999
+
+Hint:
+  dp[i] = minimum cost to reach step i.
+  dp[i] = cost[i] + min(dp[i-1], dp[i-2])
+  You only need the last two values — use two variables
+  instead of a full array. Initialize for index 0 and 1.
+  The answer is min(dp[n-1], dp[n-2]) — you can reach the
+  top from either of the last two steps.
+*/
+
+const cheapestPathUp = (cost) => {
+  // your solution here
+};
+
+console.log(cheapestPathUp([10, 15, 20])); // 15
+console.log(cheapestPathUp([1, 100, 1, 1, 1, 100, 1, 1, 100, 1])); // 6
+
+// ────────────────────────────────────────────────────────────
+// Day 83 — Max Haul (Medium)
+// Topic: Linear DP with Adjacent Constraint
+// Builds On: Day 82 (two-variable DP) — same pattern, different constraint
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A sales commission planner maximizing total commissions
+  when scheduling doesn't allow booking two consecutive
+  client calls — each requires recovery time between them.
+
+Problem:
+  Given an integer array representing the amount of money
+  at each house, return the maximum amount you can collect
+  without taking from two adjacent houses (triggering an
+  alarm).
+
+Example:
+  Input:  [1, 2, 3, 1]
+  Output: 4
+  Why:    Take house 0 (1) + house 2 (3) = 4.
+
+  Input:  [2, 7, 9, 3, 1]
+  Output: 12
+  Why:    Take house 0 (2) + house 2 (9) + house 4 (1) = 12.
+
+Constraints:
+  - 1 <= nums.length <= 100
+  - 0 <= nums[i] <= 400
+
+Hint:
+  At each house you choose:
+    - Take it: nums[i] + best result from two houses back
+    - Skip it: best result from one house back
+  Take the maximum. You only need two variables — prev2
+  (best result two houses ago) and prev1 (one house ago).
+  No array needed. This is the same shape as Day 82.
+*/
+
+const maxHaul = (nums) => {
+  // your solution here
+};
+
+console.log(maxHaul([1, 2, 3, 1])); // 4
+console.log(maxHaul([2, 7, 9, 3, 1])); // 12
+console.log(maxHaul([0])); // 0
+
+// ────────────────────────────────────────────────────────────
+// Day 84 — Can You Reach End (Medium)
+// Topic: Greedy / DP Reachability
+// Builds On: Day 24 (tracking a running max) — now the max is a reachability frontier
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A network packet routing simulation checking whether
+  data can travel from a source to a destination when
+  each node specifies its maximum forward hop range.
+
+Problem:
+  Given an integer array where nums[i] represents the
+  maximum number of steps you can jump forward from index i,
+  return true if you can reach the last index starting
+  from index 0.
+
+Example:
+  Input:  [2, 3, 1, 1, 4]
+  Output: true
+  Why:    Jump 1 from index 0 to 1, then 3 to the end.
+
+  Input:  [3, 2, 1, 0, 4]
+  Output: false
+  Why:    Always end up at index 3 (value 0), can't move forward.
+
+Constraints:
+  - 1 <= nums.length <= 10000
+  - 0 <= nums[i] <= 100000
+
+Hint:
+  Track maxReach — the furthest index you can currently
+  reach. Walk forward: at each index i, if i > maxReach,
+  you're stuck — return false. Otherwise, update maxReach
+  to max(maxReach, i + nums[i]). If you reach the last
+  index without getting stuck, return true.
+*/
+
+const canReachEnd = (nums) => {
+  // your solution here
+};
+
+console.log(canReachEnd([2, 3, 1, 1, 4])); // true
+console.log(canReachEnd([3, 2, 1, 0, 4])); // false
+console.log(canReachEnd([0])); // true
+
+// ────────────────────────────────────────────────────────────
+// Day 85 — Grid Routes (Medium)
+// Topic: 2D DP Grid
+// Builds On: Day 82/83 (1D DP) — now the table has two dimensions
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A warehouse robot counting all valid routes from the
+  top-left corner to the bottom-right corner of a grid
+  when it can only move right or down — for path planning
+  optimization.
+
+Problem:
+  There is a robot on an m x n grid. It starts at the
+  top-left corner and tries to move to the bottom-right
+  corner. The robot can only move either down or right.
+  Return the number of possible unique paths.
+
+Example:
+  Input:  m = 3, n = 7
+  Output: 28
+
+  Input:  m = 3, n = 2
+  Output: 3
+  Why:    Three paths: right-down-down, down-right-down, down-down-right.
+
+Constraints:
+  - 1 <= m, n <= 100
+
+Hint:
+  dp[i][j] = number of ways to reach cell (i, j).
+  It can only be reached from the cell above (i-1, j)
+  or the cell to the left (i, j-1).
+  So: dp[i][j] = dp[i-1][j] + dp[i][j-1].
+  Base cases: the entire top row and left column are all 1
+  (only one way to reach any cell on the edge — go straight).
+  Build the grid row by row.
+*/
+
+const gridRoutes = (m, n) => {
+  // your solution here
+};
+
+console.log(gridRoutes(3, 7)); // 28
+console.log(gridRoutes(3, 2)); // 3
+console.log(gridRoutes(1, 1)); // 1
+
+// ────────────────────────────────────────────────────────────
+// Day 86 — Minimum Coins (Medium)
+// Topic: Unbounded Knapsack DP
+// Builds On: Day 82 (build a dp array from bottom up) — now with an inner loop
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A payment terminal calculating the fewest number of
+  currency denominations needed to make exact change —
+  critical for minimizing coin usage in retail systems.
+
+Problem:
+  Given an array of coin denominations and a total amount,
+  return the fewest number of coins needed to make up
+  that amount. If it's impossible, return -1. You may use
+  each coin denomination as many times as needed.
+
+Example:
+  Input:  coins = [1, 5, 10, 25], amount = 36
+  Output: 3
+  Why:    25 + 10 + 1 = 36. Three coins.
+
+  Input:  coins = [2], amount = 3
+  Output: -1
+  Why:    No combination of 2s reaches 3.
+
+Constraints:
+  - 1 <= coins.length <= 12
+  - 1 <= coins[i] <= 2^31 - 1
+  - 0 <= amount <= 10000
+
+Hint:
+  Build dp array of size amount+1, initialized to Infinity.
+  dp[0] = 0 (zero coins to make amount 0).
+  For each amount a from 1 to amount:
+    For each coin c: if c <= a, dp[a] = min(dp[a], dp[a-c]+1)
+  The inner loop tries every coin at every amount.
+  Final answer: dp[amount] (return -1 if still Infinity).
+*/
+
+const minimumCoins = (coins, amount) => {
+  // your solution here
+};
+
+console.log(minimumCoins([1, 5, 10, 25], 36)); // 3
+console.log(minimumCoins([2], 3)); // -1
+console.log(minimumCoins([1], 0)); // 0
+
+// ────────────────────────────────────────────────────────────
+// Day 87 — Shared Story (Medium)
+// Topic: 2D DP on Two Strings
+// Builds On: Day 85 (2D DP grid) — now rows and columns represent two string characters
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A version control diffing tool measuring how similar
+  two file versions are by finding the length of their
+  longest shared edit sequence — the backbone that both
+  versions have in common.
+
+Problem:
+  Given two strings text1 and text2, return the length of
+  their longest common subsequence. A subsequence is formed
+  by deleting some characters from a string while keeping
+  the remaining characters in order. If no common
+  subsequence exists, return 0.
+
+Example:
+  Input:  text1 = "abcde", text2 = "ace"
+  Output: 3
+  Why:    "ace" is the LCS.
+
+  Input:  text1 = "abc", text2 = "abc"
+  Output: 3
+
+  Input:  text1 = "abc", text2 = "def"
+  Output: 0
+
+Constraints:
+  - 1 <= text1.length, text2.length <= 1000
+  - Both strings consist of lowercase English letters
+
+Hint:
+  dp[i][j] = LCS length of text1[0..i-1] and text2[0..j-1].
+  If characters match: dp[i][j] = dp[i-1][j-1] + 1
+  If they don't:       dp[i][j] = max(dp[i-1][j], dp[i][j-1])
+  Build the table row by row. Initialize row 0 and col 0
+  as all zeros (empty prefix). The answer is dp[m][n].
+*/
+
+const sharedStory = (text1, text2) => {
+  // your solution here
+};
+
+console.log(sharedStory("abcde", "ace")); // 3
+console.log(sharedStory("abc", "abc")); // 3
+console.log(sharedStory("abc", "def")); // 0
+
+// ────────────────────────────────────────────────────────────
+// Day 88 — Max Product Stretch (Medium)
+// Topic: DP Tracking Two State Variables (Min + Max)
+// Builds On: Day 7 (Kadane's two-variable DP) — same structure, now tracking both min and max
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A quantitative finance tool finding the most profitable
+  consecutive stretch of multiplied returns — accounting
+  for the fact that two negative periods can multiply into
+  a large positive gain.
+
+Problem:
+  Given an integer array, find the contiguous subarray
+  that has the largest product and return that product.
+
+Example:
+  Input:  [2, 3, -2, 4]
+  Output: 6
+  Why:    [2, 3] gives the highest product: 6.
+
+  Input:  [-2, 0, -1]
+  Output: 0
+
+  Input:  [-2, 3, -4]
+  Output: 24
+  Why:    (-2)*3*(-4) = 24.
+
+Constraints:
+  - 1 <= nums.length <= 20000
+  - -10 <= nums[i] <= 10
+
+Hint:
+  Unlike sum, a negative number can flip the sign.
+  A large negative times a negative = a large positive.
+  So you must track BOTH the current max product AND the
+  current min product at each step.
+  When you see a negative number, the max and min can swap.
+  This is Kadane's for products — same extend-or-restart
+  logic, but for two variables instead of one.
+*/
+
+const maxProductStretch = (nums) => {
+  // your solution here
+};
+
+console.log(maxProductStretch([2, 3, -2, 4])); // 6
+console.log(maxProductStretch([-2, 0, -1])); // 0
+console.log(maxProductStretch([-2, 3, -4])); // 24
+
+// ────────────────────────────────────────────────────────────
+// Day 89 — Decode Ways (Medium)
+// Topic: Linear DP with Validity Checks
+// Builds On: Day 33 (step counter shape) — same 1-or-2 step look-back, now with constraints
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A messaging app that encodes notifications as digit strings
+  (A=1, B=2, ..., Z=26). Given an encoded string, count
+  the total number of ways it can be decoded — since some
+  digit sequences are ambiguous (e.g. "12" could be "AB" or "L").
+
+Problem:
+  Given a string s containing only digits, return the number
+  of ways to decode it. If no valid decoding exists, return 0.
+
+Example:
+  Input:  "12"
+  Output: 2
+  Why:    "1"+"2"=AB or "12"=L.
+
+  Input:  "226"
+  Output: 3
+  Why:    "2"+"2"+"6"=BBF, "22"+"6"=VF, "2"+"26"=BZ.
+
+  Input:  "06"
+  Output: 0
+  Why:    "0" is not a valid code. "06" is not valid either.
+
+Constraints:
+  - 1 <= s.length <= 100
+  - s contains only digits
+  - s may contain leading zeros
+
+Hint:
+  dp[i] = number of ways to decode the first i characters.
+  dp[0] = 1 (empty string: one way — decode nothing).
+  dp[1] = 1 if s[0] !== '0', else 0.
+  For i >= 2:
+    Single digit: if s[i-1] !== '0', add dp[i-1] ways.
+    Two digits: if s.slice(i-2, i) is between "10" and "26",
+                add dp[i-2] ways.
+  The '0' checks are critical — '0' alone is never valid.
+*/
+
+const decodeWays = (s) => {
+  // your solution here
+};
+
+console.log(decodeWays("12")); // 2
+console.log(decodeWays("226")); // 3
+console.log(decodeWays("06")); // 0
+console.log(decodeWays("11106")); // 2
+
+// ────────────────────────────────────────────────────────────
+// Day 90 — Word Break (Medium)
+// Topic: DP with Inner Word-Boundary Scan
+// Builds On: Day 89 (position-based DP) — now the look-back scans all word lengths
+// ────────────────────────────────────────────────────────────
+/*
+Real World:
+  A search engine autocomplete system checking whether a
+  user's unspaced query string can be split into valid
+  dictionary words — used to suggest spaced corrections
+  for queries like "howmanydaysuntilchristmas".
+
+Problem:
+  Given a string s and an array of strings wordDict,
+  return true if s can be segmented into a space-separated
+  sequence of one or more dictionary words.
+
+Example:
+  Input:  s = "leetcode", wordDict = ["leet","code"]
+  Output: true
+
+  Input:  s = "applepenapple", wordDict = ["apple","pen"]
+  Output: true
+  Why:    "apple" + "pen" + "apple"
+
+  Input:  s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
+  Output: false
+
+Constraints:
+  - 1 <= s.length <= 300
+  - 1 <= wordDict.length <= 1000
+  - wordDict contains no duplicates
+
+Hint:
+  dp[i] = true if s.slice(0, i) can be segmented.
+  dp[0] = true (empty string is always valid — the base).
+  For each position i from 1 to s.length:
+    For each j from 0 to i:
+      If dp[j] is true AND s.slice(j, i) is in the word set:
+        dp[i] = true. Break the inner loop.
+  Convert wordDict to a Set first — O(1) lookups.
+  Return dp[s.length].
+*/
+
+const wordBreak = (s, wordDict) => {
+  // your solution here
+};
+
+console.log(wordBreak("leetcode", ["leet", "code"])); // true
+console.log(wordBreak("applepenapple", ["apple", "pen"])); // true
+console.log(wordBreak("catsandog", ["cats", "dog", "sand", "and", "cat"])); // false
+
+// ════════════════════════════════════════════════════════════
+//
+//  YOU MADE IT — 90 DAYS COMPLETE
+//
+//  Every major pattern covered:
+//    Arrays, Strings, Hash Maps, Recursion, Sorting,
+//    Two Pointers, Sliding Window, Linked Lists, Trees,
+//    Hash Maps Advanced, Dynamic Programming
+//
+//  What's next:
+//    - Revisit any problems that still feel shaky
+//    - Graphs: BFS and DFS from trees transfer directly
+//    - Apply these patterns in your React work —
+//      useReducer is a state machine, component trees
+//      are literal trees, memoization lives in useMemo
+//
+// ════════════════════════════════════════════════════════════
