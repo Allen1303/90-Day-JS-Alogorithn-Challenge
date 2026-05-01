@@ -32,10 +32,10 @@ Hint:
 const runningBalance = (nums) => {
 
   // your solution here
-  let arrTotal = 0 // running total - use to accumilates sum upto current index
+  let arrTotal = 0 // running total - use to accumulates sum upto current index
   nums.forEach((element, index) => { // checking each element and it position (index)
-    arrTotal += element;// arrTotal use here to hold the caluculation of each element
-    nums[index] = arrTotal; // assign the total sum to the original arrat at each index "(nums[index])"
+    arrTotal += element;// arrTotal use here to hold the calculation of each element
+    nums[index] = arrTotal; // assign the total sum to the original array at each index "(nums[index])"
   });
   return nums; //→ return the array
 };
