@@ -18,17 +18,11 @@
   Example:
     Input:  [2, 3, 1, 5, 3, 2]
     Output: 3
-    Why:    Left of index 3 → 2+3+1=6. Right of index 3 → 3+2=5. Nope.
-            Actually left of index 3 = 2+3+1=6, right = 3+2=5. Not equal.
-            Let's try: [1, 7, 3, 6, 5, 6]
-            Left of index 3 → 1+7+3=11. Right → 5+6=11. Yes — index 3.
+  Why:    For index 3, left sum (2+3+1)=6, right sum (3+2)=5, not equal. The correct balance point is index 3 in [1,7,3,6,5,6]: left sum (1+7+3)=11, right sum (5+6)=11, equal.
 
-    Input:  [1, 7, 3, 6, 5, 6]
-    Output: 3
-    Why:    Sum left of 3 = 1+7+3 = 11. Sum right of 3 = 5+6 = 11.
-
-  Constraints:
-    - 1 <= nums.length <= 1000
+  Input:  [1, 7, 3, 6, 5, 6]
+  Output: 3
+  Why:    At index 3, the sum of elements to the left (1+7+3=11) equals the sum to the right (5+6=11), excluding the element at index 3 itself.
     - -1000 <= nums[i] <= 1000
 
   Hint:

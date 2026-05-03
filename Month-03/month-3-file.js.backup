@@ -100,15 +100,15 @@ Problem:
 Example:
   Input:  3→2→0→-4 (tail points back to node at index 1)
   Output: true
-  Conceptual Explanation:    The list has a cycle because the tail points back to node at index 1.
+  Why:    The list has a cycle because the tail points back to node at index 1.
 
   Input:  1→2 (tail points back to node at index 0)
   Output: true
-  Conceptual Explanation:    The list has a cycle because the tail points back to node at index 0.
+  Why:    The list has a cycle because the tail points back to node at index 0.
 
   Input:  1 (no cycle)
   Output: false
-  Conceptual Explanation:    The list has no cycle as it ends with null.
+  Why:    The list has no cycle as it ends with null.
 
 Constraints:
   - 0 <= list length <= 10000
@@ -158,11 +158,11 @@ Problem:
 Example:
   Input:  1→2→3→4→5
   Output: node 3 (value 3)
-  Conceptual Explanation:    With 5 nodes, the middle is the 3rd node (value 3).
+  Why:    With 5 nodes, the middle is the 3rd node (value 3).
 
   Input:  1→2→3→4→5→6
   Output: node 4 (value 4) — second of two middles
-  Conceptual Explanation:    With 6 nodes, the two middles are 3rd and 4th; return the second one (value 4).
+  Why:    With 6 nodes, the two middles are 3rd and 4th; return the second one (value 4).
 
 Constraints:
   - 1 <= list length <= 100
@@ -204,7 +204,7 @@ Example:
   Input:  l1 = 2→4→3 (represents 342)
           l2 = 5→6→4 (represents 465)
   Output: 7→0→8        (represents 807)
-  Conceptual Explanation:    342 + 465 = 807
+  Why:    342 + 465 = 807
 
   Input:  l1 = 0, l2 = 0
   Output: 0
@@ -256,11 +256,11 @@ Problem:
 Example:
   Input:  1→2→3→4→5
   Output: 1→3→5→2→4
-  Conceptual Explanation:    Odd indices (1-based): 1,3,5; even: 2,4. Combined: 1→3→5→2→4.
+  Why:    Odd indices (1-based): 1,3,5; even: 2,4. Combined: 1→3→5→2→4.
 
   Input:  2→1→3→5→6→4→7
   Output: 2→3→6→7→1→5→4
-  Conceptual Explanation:    Odd indices: 2,3,6,7; even: 1,5,4. Combined: 2→3→6→7→1→5→4.
+  Why:    Odd indices: 2,3,6,7; even: 1,5,4. Combined: 2→3→6→7→1→5→4.
 
 Constraints:
   - 0 <= list length <= 10000
@@ -303,15 +303,15 @@ Problem:
 Example:
   Input:  1→2→3→4
   Output: 2→1→4→3
-  Conceptual Explanation:    Swap adjacent pairs: (1,2) → (2,1), (3,4) → (4,3).
+  Why:    Swap adjacent pairs: (1,2) → (2,1), (3,4) → (4,3).
 
   Input:  1→2→3
   Output: 2→1→3
-  Conceptual Explanation:    Swap (1,2) → (2,1), 3 remains.
+  Why:    Swap (1,2) → (2,1), 3 remains.
 
   Input:  1
   Output: 1
-  Conceptual Explanation:    Single node, no swap needed.
+  Why:    Single node, no swap needed.
 
 Constraints:
   - 0 <= list length <= 100
@@ -355,11 +355,11 @@ Problem:
 Example:
   Input:  1→2→3→4→5, k = 2
   Output: 4→5→1→2→3
-  Conceptual Explanation:    Rotate right twice: last 2 nodes move to front.
+  Why:    Rotate right twice: last 2 nodes move to front.
 
   Input:  0→1→2, k = 4
   Output: 2→0→1
-  Conceptual Explanation:    k=4 on length 3 is same as k=1 (4 % 3 = 1).
+  Why:    k=4 on length 3 is same as k=1 (4 % 3 = 1).
 
 Constraints:
   - 0 <= list length <= 500
@@ -405,7 +405,7 @@ Example:
   Input:  [[7,null],[13,0],[11,4],[10,2],[1,0]]
           (each pair is [val, index of random pointer])
   Output: A deep copy with the same structure.
-  Conceptual Explanation:    Creates new nodes with the same values and correctly wired next and random pointers.
+  Why:    Creates new nodes with the same values and correctly wired next and random pointers.
 
 Constraints:
   - 0 <= list length <= 1000
@@ -485,11 +485,11 @@ Example:
            /
           3
   Output: [1, 3, 2]
-  Conceptual Explanation:    Inorder traversal: left subtree of 1 (empty), 1, right subtree of 1 (2): left of 2 (3), 2, right of 2 (empty). Result: 1,3,2.
+  Why:    Inorder traversal: left subtree of 1 (empty), 1, right subtree of 1 (2): left of 2 (3), 2, right of 2 (empty). Result: 1,3,2.
 
   Input:  [1, 2, 3, 4, 5]
   Output: [4, 2, 5, 1, 3]
-  Conceptual Explanation:    Tree structure: 1 (left: 2 (left:4, right:5), right:3). Inorder: 4,2,5,1,3.
+  Why:    Tree structure: 1 (left: 2 (left:4, right:5), right:3). Inorder: 4,2,5,1,3.
 
 Constraints:
   - 0 <= number of nodes <= 100
@@ -536,7 +536,7 @@ Example:
       / \ / \
      3  4 4  3
   Output: true
-  Conceptual Explanation:    The tree is symmetric; left subtree mirrors the right subtree.
+  Why:    The tree is symmetric; left subtree mirrors the right subtree.
 
   Input:
        1
@@ -545,7 +545,7 @@ Example:
       \   \
        3   3
   Output: false
-  Conceptual Explanation:    The left subtree has a right child, right has right child, but not mirrored positions.
+  Why:    The left subtree has a right child, right has right child, but not mirrored positions.
 
 Constraints:
   - 1 <= number of nodes <= 1000
@@ -588,11 +588,11 @@ Problem:
 Example:
   Input:  [3, 9, 20, null, null, 15, 7]
   Output: [[3], [9, 20], [15, 7]]
-  Conceptual Explanation:    Level order: level 0: [3], level 1: [9,20], level 2: [15,7].
+  Why:    Level order: level 0: [3], level 1: [9,20], level 2: [15,7].
 
   Input:  [1]
   Output: [[1]]
-  Conceptual Explanation:    Single node tree: one level with [1].
+  Why:    Single node tree: one level with [1].
 
 Constraints:
   - 0 <= number of nodes <= 2000
@@ -638,11 +638,10 @@ Problem:
 Example:
   Input:  [2, 1, 3]
   Output: true
-  Conceptual Explanation: Tree is valid: left child (1) < parent (2) < right child (3); all subtrees satisfy BST properties.
 
   Input:  [5, 1, 4, null, null, 3, 6]
   Output: false
-  Conceptual Explanation: Node 4 is in the right subtree of 5, but 4 < 5 — violates BST property.
+  Why:    Node 4 is in the right subtree of 5, but 4 < 5 — invalid.
 
 Constraints:
   - 1 <= number of nodes <= 10000
@@ -686,11 +685,11 @@ Problem:
 Example:
   Input:  [1, 2, 3, null, 5, null, 4]
   Output: [1, 3, 4]
-  Conceptual Explanation:    Rightmost nodes: level 0: 1, level 1: 3, level 2: 4.
+  Why:    Rightmost nodes: level 0: 1, level 1: 3, level 2: 4.
 
   Input:  [1, null, 3]
   Output: [1, 3]
-  Conceptual Explanation:    Rightmost nodes: level 0: 1, level 1: 3.
+  Why:    Rightmost nodes: level 0: 1, level 1: 3.
 
 Constraints:
   - 0 <= number of nodes <= 100
@@ -733,7 +732,7 @@ Example:
   Input:  root = [5,4,8,11,null,13,4,7,2,null,null,5,1]
           targetSum = 22
   Output: [[5,4,11,2],[5,8,4,5]]
-  Conceptual Explanation:    Root-to-leaf paths summing to 22: 5→4→11→2 and 5→8→4→5.
+  Why:    Root-to-leaf paths summing to 22: 5→4→11→2 and 5→8→4→5.
 
 Constraints:
   - 0 <= number of nodes <= 5000
@@ -780,11 +779,10 @@ Problem:
 Example:
   Input:  root = [6,2,8,0,4,7,9,null,null,3,5], p=2, q=8
   Output: 6
-  Conceptual Explanation: Both 2 and 8 are in separate subtrees of 6, making 6 their lowest common ancestor.
 
   Input:  same tree, p=2, q=4
   Output: 2
-  Conceptual Explanation: Node 2 is an ancestor of 4; the lowest common ancestor is 2 itself.
+  Why:    2 is an ancestor of 4. The LCA is 2 itself.
 
 Constraints:
   - 2 <= number of nodes <= 100000
@@ -841,11 +839,11 @@ Problem:
 Example:
   Input:  ["eat","tea","tan","ate","nat","bat"]
   Output: [["bat"],["nat","tan"],["ate","eat","tea"]]
-  Conceptual Explanation:    Anagram groups: "bat" (unique), "nat"+"tan" (same letters), "ate"+"eat"+"tea" (same letters).
+  Why:    Anagram groups: "bat" (unique), "nat"+"tan" (same letters), "ate"+"eat"+"tea" (same letters).
 
   Input:  [""]
   Output: [[""]]
-  Conceptual Explanation:    Empty string forms its own anagram group.
+  Why:    Empty string forms its own anagram group.
 
 Constraints:
   - 1 <= strs.length <= 10000
@@ -888,11 +886,11 @@ Problem:
 Example:
   Input:  nums = [1, 1, 1, 2, 2, 3], k = 2
   Output: [1, 2]
-  Conceptual Explanation:    Frequencies: 1 appears 3 times, 2 appears 2 times, 3 appears 1 time. Top 2: 1 and 2.
+  Why:    Frequencies: 1 appears 3 times, 2 appears 2 times, 3 appears 1 time. Top 2: 1 and 2.
 
   Input:  nums = [1], k = 1
   Output: [1]
-  Conceptual Explanation:    Only one element, frequency 1, so top 1 is 1.
+  Why:    Only one element, frequency 1, so top 1 is 1.
 
 Constraints:
   - 1 <= nums.length <= 100000
@@ -935,11 +933,11 @@ Problem:
 Example:
   Input:  nums = [1, 1, 1], k = 2
   Output: 2
-  Conceptual Explanation:    [1,1] at index 0-1 and [1,1] at index 1-2.
+  Why:    [1,1] at index 0-1 and [1,1] at index 1-2.
 
   Input:  nums = [1, 2, 3], k = 3
   Output: 2
-  Conceptual Explanation:    [3] and [1,2]
+  Why:    [3] and [1,2]
 
 Constraints:
   - 1 <= nums.length <= 20000
@@ -984,7 +982,7 @@ Problem:
 Example:
   Input:  [100, 4, 200, 1, 3, 2]
   Output: 4
-  Conceptual Explanation:    [1, 2, 3, 4] is the longest consecutive sequence.
+  Why:    [1, 2, 3, 4] is the longest consecutive sequence.
 
   Input:  [0, 3, 7, 2, 5, 8, 4, 6, 0, 1]
   Output: 9
@@ -1029,7 +1027,7 @@ Problem:
 Example:
   Input:  [[3,2,1],[1,7,6],[2,7,7]]
   Output: 1
-  Conceptual Explanation:    Row 0 [3,2,1] matches Column 2 [1,6,7]? 
+  Why:    Row 0 [3,2,1] matches Column 2 [1,6,7]? 
           Let's check: Row 2 = [2,7,7], Col 1 = [2,7,7]. Match!
 
   Input:  [[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]
@@ -1088,7 +1086,7 @@ Problem:
 Example:
   Input:  nums = [23, 2, 4, 6, 7], k = 6
   Output: true
-  Conceptual Explanation:    [2, 4] sums to 6 (length 2, multiple of 6).
+  Why:    [2, 4] sums to 6 (length 2, multiple of 6).
 
   Input:  nums = [23, 2, 6, 4, 7], k = 13
   Output: false
@@ -1136,7 +1134,7 @@ Problem:
 Example:
   Input:  s = "eceba", k = 2
   Output: 3
-  Conceptual Explanation:    "ece" has 2 distinct characters and length 3.
+  Why:    "ece" has 2 distinct characters and length 3.
 
   Input:  s = "aa", k = 1
   Output: 2
@@ -1198,7 +1196,7 @@ Problem:
 Example:
   Input:  [10, 15, 20]
   Output: 15
-  Conceptual Explanation:    Start at index 1 (cost 15), jump 2 → top. Total: 15.
+  Why:    Start at index 1 (cost 15), jump 2 → top. Total: 15.
 
   Input:  [1, 100, 1, 1, 1, 100, 1, 1, 100, 1]
   Output: 6
@@ -1243,11 +1241,11 @@ Problem:
 Example:
   Input:  [1, 2, 3, 1]
   Output: 4
-  Conceptual Explanation:    Take house 0 (1) + house 2 (3) = 4.
+  Why:    Take house 0 (1) + house 2 (3) = 4.
 
   Input:  [2, 7, 9, 3, 1]
   Output: 12
-  Conceptual Explanation:    Take house 0 (2) + house 2 (9) + house 4 (1) = 12.
+  Why:    Take house 0 (2) + house 2 (9) + house 4 (1) = 12.
 
 Constraints:
   - 1 <= nums.length <= 100
@@ -1290,11 +1288,11 @@ Problem:
 Example:
   Input:  [2, 3, 1, 1, 4]
   Output: true
-  Conceptual Explanation:    Jump 1 from index 0 to 1, then 3 to the end.
+  Why:    Jump 1 from index 0 to 1, then 3 to the end.
 
   Input:  [3, 2, 1, 0, 4]
   Output: false
-  Conceptual Explanation:    Always end up at index 3 (value 0), can't move forward.
+  Why:    Always end up at index 3 (value 0), can't move forward.
 
 Constraints:
   - 1 <= nums.length <= 10000
@@ -1337,11 +1335,10 @@ Problem:
 Example:
   Input:  m = 3, n = 7
   Output: 28
-  Conceptual Explanation: From a 3×7 grid, there are C(8,2)=28 unique shortest paths to the bottom-right.
 
   Input:  m = 3, n = 2
   Output: 3
-  Conceptual Explanation: Three distinct paths: right-down-down, down-right-down, down-down-right.
+  Why:    Three paths: right-down-down, down-right-down, down-down-right.
 
 Constraints:
   - 1 <= m, n <= 100
@@ -1384,11 +1381,11 @@ Problem:
 Example:
   Input:  coins = [1, 5, 10, 25], amount = 36
   Output: 3
-  Conceptual Explanation:    25 + 10 + 1 = 36. Three coins.
+  Why:    25 + 10 + 1 = 36. Three coins.
 
   Input:  coins = [2], amount = 3
   Output: -1
-  Conceptual Explanation:    No combination of 2s reaches 3.
+  Why:    No combination of 2s reaches 3.
 
 Constraints:
   - 1 <= coins.length <= 12
@@ -1434,7 +1431,7 @@ Problem:
 Example:
   Input:  text1 = "abcde", text2 = "ace"
   Output: 3
-  Conceptual Explanation:    "ace" is the LCS.
+  Why:    "ace" is the LCS.
 
   Input:  text1 = "abc", text2 = "abc"
   Output: 3
@@ -1481,14 +1478,14 @@ Problem:
 Example:
   Input:  [2, 3, -2, 4]
   Output: 6
-  Conceptual Explanation:    [2, 3] gives the highest product: 6.
+  Why:    [2, 3] gives the highest product: 6.
 
   Input:  [-2, 0, -1]
   Output: 0
 
   Input:  [-2, 3, -4]
   Output: 24
-  Conceptual Explanation:    (-2)*3*(-4) = 24.
+  Why:    (-2)*3*(-4) = 24.
 
 Constraints:
   - 1 <= nums.length <= 20000
@@ -1531,15 +1528,15 @@ Problem:
 Example:
   Input:  "12"
   Output: 2
-  Conceptual Explanation:    "1"+"2"=AB or "12"=L.
+  Why:    "1"+"2"=AB or "12"=L.
 
   Input:  "226"
   Output: 3
-  Conceptual Explanation:    "2"+"2"+"6"=BBF, "22"+"6"=VF, "2"+"26"=BZ.
+  Why:    "2"+"2"+"6"=BBF, "22"+"6"=VF, "2"+"26"=BZ.
 
   Input:  "06"
   Output: 0
-  Conceptual Explanation:    "0" is not a valid code. "06" is not valid either.
+  Why:    "0" is not a valid code. "06" is not valid either.
 
 Constraints:
   - 1 <= s.length <= 100
@@ -1586,11 +1583,10 @@ Problem:
 Example:
   Input:  s = "leetcode", wordDict = ["leet","code"]
   Output: true
-  Conceptual Explanation: The string can be segmented as "leet" + "code", both in the dictionary.
 
   Input:  s = "applepenapple", wordDict = ["apple","pen"]
   Output: true
-  Conceptual Explanation: Segmented as "apple" + "pen" + "apple"; all segments exist in the word dictionary.
+  Why:    "apple" + "pen" + "apple"
 
   Input:  s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
   Output: false

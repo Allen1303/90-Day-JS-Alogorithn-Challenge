@@ -528,11 +528,10 @@ Problem:
 Example:
   Input:  ["flower", "flow", "flight"]
   Output: "fl"
-  Conceptual Explanation: All three strings begin with "fl", making it the longest common prefix.
 
   Input:  ["dog", "racecar", "car"]
   Output: ""
-  Conceptual Explanation: These strings share no common starting characters.
+  Conceptual Explanation:    No common prefix.
 
 Constraints:
   - 1 <= strs.length <= 200
@@ -1182,11 +1181,9 @@ Problem:
 Example:
   Input:  s = "abcd", t = "abcde"
   Output: "e"
-  Conceptual Explanation: String t has one extra character "e" that is not in s, so the answer is "e".
 
   Input:  s = "ae", t = "aea"
   Output: "a"
-  Conceptual Explanation: String t has one extra character "a" that is not present in s.
 
 Constraints:
   - 0 <= s.length <= 1000
@@ -1229,11 +1226,10 @@ Problem:
 Example:
   Input:  ransomNote = "aa", magazine = "aab"
   Output: true
-  Conceptual Explanation: Magazine has two 'a's and one 'b'; ransomNote can be fully constructed using them.
 
   Input:  ransomNote = "aa", magazine = "ab"
   Output: false
-  Conceptual Explanation: Magazine has only one 'a', but ransomNote requires two 'a's, so construction is impossible.
+  Conceptual Explanation:    Only one 'a' in magazine but ransomNote needs two.
 
 Constraints:
   - 1 <= ransomNote.length, magazine.length <= 100000

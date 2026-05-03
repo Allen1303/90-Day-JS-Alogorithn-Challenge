@@ -19,7 +19,7 @@ Problem:
 Example:
   Input:  [0, 1, 0, 3, 12]
   Output: [1, 3, 12, 0, 0]
-  Why:    Non-zeros (1, 3, 12) keep their order; zeros go to end.
+  Why:    The non-zero elements (1, 3, 12) maintain their relative order from the original array, while all zeros are moved to the end.
 
 Constraints:
   - 1 <= nums.length <= 1000
