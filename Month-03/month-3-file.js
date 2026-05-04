@@ -106,6 +106,74 @@ const LoopDetector = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — LoopDetector ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const LoopDetector_rep1 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — LoopDetector ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const LoopDetector_rep2 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — LoopDetector ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const LoopDetector_rep3 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 61: LoopDetector
+// Complete this BEFORE moving to Day 62
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 62
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 62 — Find the Middle
 // Topic: Fast and Slow Pointer Midpoint
@@ -158,6 +226,74 @@ const FindtheMiddle = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — FindtheMiddle ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const FindtheMiddle_rep1 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — FindtheMiddle ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const FindtheMiddle_rep2 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — FindtheMiddle ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const FindtheMiddle_rep3 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 62: FindtheMiddle
+// Complete this BEFORE moving to Day 63
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 63
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 63 — Big Number Add
 // Topic: Parallel List Traversal Plus Carry Logic
@@ -208,6 +344,74 @@ const BigNumberAdd = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — BigNumberAdd ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const BigNumberAdd_rep1 = (l1, l2) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — BigNumberAdd ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const BigNumberAdd_rep2 = (l1, l2) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — BigNumberAdd ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const BigNumberAdd_rep3 = (l1, l2) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 63: BigNumberAdd
+// Complete this BEFORE moving to Day 64
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 64
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 64 — Split and Regroup
 // Topic: Dual Chain Linked List Restructuring
@@ -257,6 +461,74 @@ const SplitandRegroup = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — SplitandRegroup ───────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const SplitandRegroup_rep1 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — SplitandRegroup ───────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const SplitandRegroup_rep2 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — SplitandRegroup ───────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const SplitandRegroup_rep3 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 64: SplitandRegroup
+// Complete this BEFORE moving to Day 65
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 65
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 65 — Pair Swap
 // Topic: Group Pointer Rewiring with Dummy Head
@@ -310,6 +582,74 @@ const PairSwap = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — PairSwap ──────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const PairSwap_rep1 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — PairSwap ──────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const PairSwap_rep2 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — PairSwap ──────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const PairSwap_rep3 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 65: PairSwap
+// Complete this BEFORE moving to Day 66
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 66
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 66 — Rotate Chain
 // Topic: Find Tail Then Break at New Head
@@ -364,6 +704,74 @@ const RotateChain = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — RotateChain ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const RotateChain_rep1 = (head, k) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — RotateChain ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const RotateChain_rep2 = (head, k) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — RotateChain ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const RotateChain_rep3 = (head, k) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 66: RotateChain
+// Complete this BEFORE moving to Day 67
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 67
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 67 — Deep Clone
 // Topic: Hash Map Plus Two Pass Linked List Clone
@@ -406,6 +814,73 @@ const DeepClone = (...args) => {
 //  Thread: DFS traversal → mirror check → BFS level order
 //          → BST validation with bounds → rightmost per level
 //          → DFS backtracking → BST-guided LCA
+// ════════════════════════════════════════════════════════════
+
+// ── Repetition 1/3 — DeepClone ─────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const DeepClone_rep1 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — DeepClone ─────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const DeepClone_rep2 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — DeepClone ─────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const DeepClone_rep3 = (head) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 67: DeepClone
+// Complete this BEFORE moving to Day 68
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 68
 // ════════════════════════════════════════════════════════════
 
 // ─────────────────────────────────────────────────────────────────────
@@ -470,6 +945,74 @@ const InorderWalk = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — InorderWalk ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const InorderWalk_rep1 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — InorderWalk ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const InorderWalk_rep2 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — InorderWalk ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const InorderWalk_rep3 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 68: InorderWalk
+// Complete this BEFORE moving to Day 69
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 69
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 69 — Mirror Check
 // Topic: Simultaneous DFS on Two Subtrees
@@ -523,6 +1066,74 @@ const MirrorCheck = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — MirrorCheck ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MirrorCheck_rep1 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — MirrorCheck ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MirrorCheck_rep2 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — MirrorCheck ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MirrorCheck_rep3 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 69: MirrorCheck
+// Complete this BEFORE moving to Day 70
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 70
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 70 — Floor by Floor
 // Topic: BFS with a Queue
@@ -572,6 +1183,74 @@ const FloorbyFloor = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — FloorbyFloor ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const FloorbyFloor_rep1 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — FloorbyFloor ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const FloorbyFloor_rep2 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — FloorbyFloor ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const FloorbyFloor_rep3 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 70: FloorbyFloor
+// Complete this BEFORE moving to Day 71
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 71
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 71 — Valid BST
 // Topic: DFS with Min Max Bounds
@@ -625,6 +1304,74 @@ const ValidBST = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — ValidBST ──────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const ValidBST_rep1 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — ValidBST ──────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const ValidBST_rep2 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — ValidBST ──────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const ValidBST_rep3 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 71: ValidBST
+// Complete this BEFORE moving to Day 72
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 72
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 72 — Right Side View
 // Topic: BFS Capture Last Node Per Level
@@ -674,6 +1421,74 @@ const RightSideView = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — RightSideView ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const RightSideView_rep1 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — RightSideView ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const RightSideView_rep2 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — RightSideView ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const RightSideView_rep3 = (root) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 72: RightSideView
+// Complete this BEFORE moving to Day 73
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 73
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 73 — All Root Paths
 // Topic: DFS Backtracking
@@ -724,6 +1539,74 @@ const AllRootPaths = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — AllRootPaths ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const AllRootPaths_rep1 = (root, targetSum) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — AllRootPaths ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const AllRootPaths_rep2 = (root, targetSum) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — AllRootPaths ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const AllRootPaths_rep3 = (root, targetSum) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 73: AllRootPaths
+// Complete this BEFORE moving to Day 74
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 74
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 74 — Common Manager
 // Topic: BST Properties for Efficient LCA
@@ -770,6 +1653,73 @@ const CommonManager = (...args) => {
 //  Thread: sorted-key grouping → bucket sort → prefix sum in map
 //          → Set sequence building → matrix serialization
 //          → prefix sum + modulo → generalized K-distinct window
+// ════════════════════════════════════════════════════════════
+
+// ── Repetition 1/3 — CommonManager ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const CommonManager_rep1 = (root, p, q) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — CommonManager ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const CommonManager_rep2 = (root, p, q) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — CommonManager ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const CommonManager_rep3 = (root, p, q) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 74: CommonManager
+// Complete this BEFORE moving to Day 75
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 75
 // ════════════════════════════════════════════════════════════
 
 // ─────────────────────────────────────────────────────────────────────
@@ -835,6 +1785,74 @@ const AnagramGroups = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — AnagramGroups ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const AnagramGroups_rep1 = (strs) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — AnagramGroups ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const AnagramGroups_rep2 = (strs) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — AnagramGroups ─────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const AnagramGroups_rep3 = (strs) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 75: AnagramGroups
+// Complete this BEFORE moving to Day 76
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 76
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 76 — Top K Frequent
 // Topic: Frequency Map Plus Bucket Sort
@@ -885,6 +1903,74 @@ const TopKFrequent = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — TopKFrequent ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const TopKFrequent_rep1 = (nums, k) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — TopKFrequent ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const TopKFrequent_rep2 = (nums, k) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — TopKFrequent ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const TopKFrequent_rep3 = (nums, k) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 76: TopKFrequent
+// Complete this BEFORE moving to Day 77
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 77
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 77 — Sum to K
 // Topic: Prefix Sum Stored in Hash Map
@@ -939,6 +2025,74 @@ const SumtoK = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — SumtoK ────────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const SumtoK_rep1 = (nums, k) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — SumtoK ────────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const SumtoK_rep2 = (nums, k) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — SumtoK ────────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const SumtoK_rep3 = (nums, k) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 77: SumtoK
+// Complete this BEFORE moving to Day 78
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 78
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 78 — Longest Consecutive Run
 // Topic: Hash Set Plus Sequence Building
@@ -974,6 +2128,73 @@ const LongestConsecutiveRun = (...args) => {
 };
 
 // add your test cases here
+
+// ── Repetition 1/3 — LongestConsecutiveRun ─────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const LongestConsecutiveRun_rep1 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — LongestConsecutiveRun ─────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const LongestConsecutiveRun_rep2 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — LongestConsecutiveRun ─────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const LongestConsecutiveRun_rep3 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 78: LongestConsecutiveRun
+// Complete this BEFORE moving to Day 79
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 79
+// ════════════════════════════════════════════════════════════
 
 // ─────────────────────────────────────────────────────────────────────
 // ─── REVISION CHECK — Day 79 ─────────────────────────────────────
@@ -1038,6 +2259,74 @@ const RowColumnMatch = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — RowColumnMatch ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const RowColumnMatch_rep1 = (grid) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — RowColumnMatch ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const RowColumnMatch_rep2 = (grid) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — RowColumnMatch ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const RowColumnMatch_rep3 = (grid) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 79: RowColumnMatch
+// Complete this BEFORE moving to Day 80
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 80
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 80 — Divisible Range
 // Topic: Prefix Sum Plus Modulo Plus Hash Map
@@ -1088,6 +2377,74 @@ const DivisibleRange = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — DivisibleRange ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const DivisibleRange_rep1 = (nums, k) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — DivisibleRange ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const DivisibleRange_rep2 = (nums, k) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — DivisibleRange ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const DivisibleRange_rep3 = (nums, k) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 80: DivisibleRange
+// Complete this BEFORE moving to Day 81
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 81
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 81 — K Distinct Window
 // Topic: Sliding Window Plus Distinct Count in Map
@@ -1133,6 +2490,73 @@ const KDistinctWindow = (...args) => {
 //  Thread: 1D two-variable DP → adjacent constraint → reachability
 //          → 2D grid DP → unbounded knapsack → 2D string DP
 //          → two-state tracking → validity checks → word boundary scan
+// ════════════════════════════════════════════════════════════
+
+// ── Repetition 1/3 — KDistinctWindow ───────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const KDistinctWindow_rep1 = (s, k) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — KDistinctWindow ───────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const KDistinctWindow_rep2 = (s, k) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — KDistinctWindow ───────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const KDistinctWindow_rep3 = (s, k) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 81: KDistinctWindow
+// Complete this BEFORE moving to Day 82
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 82
 // ════════════════════════════════════════════════════════════
 
 // ─────────────────────────────────────────────────────────────────────
@@ -1201,6 +2625,74 @@ const CheapestPathUp = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — CheapestPathUp ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const CheapestPathUp_rep1 = (cost) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — CheapestPathUp ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const CheapestPathUp_rep2 = (cost) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — CheapestPathUp ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const CheapestPathUp_rep3 = (cost) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 82: CheapestPathUp
+// Complete this BEFORE moving to Day 83
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 83
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 83 — Max Haul
 // Topic: Linear DP with Adjacent Constraint
@@ -1250,6 +2742,74 @@ const MaxHaul = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — MaxHaul ───────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MaxHaul_rep1 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — MaxHaul ───────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MaxHaul_rep2 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — MaxHaul ───────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MaxHaul_rep3 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 83: MaxHaul
+// Complete this BEFORE moving to Day 84
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 84
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 84 — Can You Reach End
 // Topic: Greedy Reachability Tracking
@@ -1303,6 +2863,74 @@ const CanYouReachEnd = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — CanYouReachEnd ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const CanYouReachEnd_rep1 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — CanYouReachEnd ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const CanYouReachEnd_rep2 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — CanYouReachEnd ────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const CanYouReachEnd_rep3 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 84: CanYouReachEnd
+// Complete this BEFORE moving to Day 85
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 85
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 85 — Grid Routes
 // Topic: 2D DP Grid
@@ -1355,6 +2983,74 @@ const GridRoutes = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — GridRoutes ────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const GridRoutes_rep1 = (m, n) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — GridRoutes ────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const GridRoutes_rep2 = (m, n) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — GridRoutes ────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const GridRoutes_rep3 = (m, n) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 85: GridRoutes
+// Complete this BEFORE moving to Day 86
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 86
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 86 — Minimum Coins
 // Topic: Unbounded Knapsack DP
@@ -1404,6 +3100,74 @@ const MinimumCoins = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — MinimumCoins ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MinimumCoins_rep1 = (coins, amount) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — MinimumCoins ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MinimumCoins_rep2 = (coins, amount) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — MinimumCoins ──────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MinimumCoins_rep3 = (coins, amount) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 86: MinimumCoins
+// Complete this BEFORE moving to Day 87
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 87
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 87 — Shared Story
 // Topic: 2D DP on Two Strings
@@ -1457,6 +3221,74 @@ const SharedStory = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — SharedStory ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const SharedStory_rep1 = (text1, text2) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — SharedStory ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const SharedStory_rep2 = (text1, text2) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — SharedStory ───────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const SharedStory_rep3 = (text1, text2) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 87: SharedStory
+// Complete this BEFORE moving to Day 88
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 88
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 88 — Max Product Stretch
 // Topic: DP Tracking Two State Variables
@@ -1510,6 +3342,74 @@ const MaxProductStretch = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — MaxProductStretch ─────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MaxProductStretch_rep1 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — MaxProductStretch ─────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MaxProductStretch_rep2 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — MaxProductStretch ─────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const MaxProductStretch_rep3 = (nums) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 88: MaxProductStretch
+// Complete this BEFORE moving to Day 89
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 89
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 89 — Decode Ways
 // Topic: Linear DP with Validity Checks
@@ -1567,6 +3467,74 @@ const DecodeWays = (...args) => {
 //
 // After each revision complete the Feynman Checkpoint in the revision file.
 // ✅ Return here only after ALL revisions and checkpoints are done.
+
+// ── Repetition 1/3 — DecodeWays ────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const DecodeWays_rep1 = (s) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — DecodeWays ────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const DecodeWays_rep2 = (s) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — DecodeWays ────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const DecodeWays_rep3 = (s) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 89: DecodeWays
+// Complete this BEFORE moving to Day 90
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 90
+// ════════════════════════════════════════════════════════════
+
 // ─────────────────────────────────────────────────────────────────────
 // Day 90 — Word Break
 // Topic: DP with Inner Word Boundary Scan
@@ -1622,4 +3590,71 @@ const WordBreak = (...args) => {
 //   Apply patterns in React — useReducer is a state machine,
 //   component trees are literal trees, useMemo is memoization
 //
+// ════════════════════════════════════════════════════════════
+
+// ── Repetition 1/3 — WordBreak ─────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const WordBreak_rep1 = (s, wordDict) => {
+  // reconstruct from memory
+};
+
+// test your rep1 solution here
+
+// ── Repetition 2/3 — WordBreak ─────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const WordBreak_rep2 = (s, wordDict) => {
+  // reconstruct from memory
+};
+
+// test your rep2 solution here
+
+// ── Repetition 3/3 — WordBreak ─────────────────────────────────────────
+// Solve from scratch. No peeking at the solution above.
+// Close all previous attempts before starting.
+
+const WordBreak_rep3 = (s, wordDict) => {
+  // reconstruct from memory
+};
+
+// test your rep3 solution here
+
+// ════════════════════════════════════════════════════════════
+// FEYNMAN CHECKPOINT — Day 90: WordBreak
+// Complete this BEFORE moving to Day 91
+// ════════════════════════════════════════════════════════════
+/*
+The Feynman Technique: if you cannot explain it simply,
+you do not understand it yet. No code — plain English only.
+
+1. EXPLAIN
+   Describe the core pattern of this problem in 2-3 sentences
+   as if teaching someone who has never written code.
+   What is the problem really asking?
+   What insight makes the solution work?
+
+   YOUR EXPLANATION:
+
+
+2. IDENTIFY GAPS
+   Looking back at rep1, rep2, and rep3 — what did you
+   hesitate on? What took the longest to reconstruct?
+   Be specific and honest. Those hesitations are your gaps.
+
+   YOUR GAPS:
+
+
+3. CLOSE GAPS
+   For each gap identified above find the concept on MDN
+   or in Eloquent JS. Write the source next to each gap.
+   Do not move forward until every gap has a reference.
+
+   YOUR REFERENCES:
+
+
+*/
+// ✅ Feynman checkpoint complete — proceed to Day 91
 // ════════════════════════════════════════════════════════════
