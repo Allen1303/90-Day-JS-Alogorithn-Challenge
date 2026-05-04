@@ -58,6 +58,12 @@ Hint:
 
 const RunningBalance = (nums) => {
   // your solution here
+  let total = 0;
+  nums.forEach((item, index) => {
+    total += item;
+    nums[index] = total;
+  });
+  return nums;
 };
 
 console.log(JSON.stringify(RunningBalance([100, -20, 50, -30, 10]))); // [100,80,130,100,110]
