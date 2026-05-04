@@ -4,1384 +4,1610 @@
 // Days 1–30 | Difficulty: Easy
 // ============================================================
 // HOW TO USE:
-//   1. Read the problem description and hint for the day
-//   2. Write your solution inside the starter function
-//   3. Run with: node month1.js
-//      (comment out test lines from other days to isolate)
-//   4. Bring anything that doesn't click to chat
+//   1. Check the revision prompt at the top of each day
+//   2. Complete all revisions first — month1_revisions.js
+//   3. Read the full problem: Real World, Conceptual Explanation,
+//      Input, Output, Examples, Constraints, and Hint
+//   4. Write your solution in the starter function
+//   5. Run with: node month1_challenges.js
+//
+// NORAL COMMITMENT:
+//   No AI. No Google. MDN and Eloquent JS only.
+//   No code examples appear in this file — only concepts.
+//   Your job is to translate understanding into code.
 // ============================================================
 
 // ════════════════════════════════════════════════════════════
 //  WEEK 1 — Array Traversal Toolkit (Days 1–7)
-//
-//  Thread: One new idea added each day.
-//    Day 1 → walk and accumulate
-//    Day 2 → walk with a tracked total
-//    Day 3 → walk with a write pointer
-//    Day 4 → walk backwards with carry
-//    Day 5 → walk tracking one running state variable
-//    Day 6 → walk with two pointers, same direction
-//    Day 7 → walk tracking two state variables (extend or reset)
-//
-//  By Day 7 you have a complete array traversal toolkit.
+//  Thread: walk + accumulate → walk + track → walk + write
+//          → walk backwards → walk + one state variable
+//          → walk + two same-direction pointers
+//          → walk + two state variables (extend or reset)
 // ════════════════════════════════════════════════════════════
-
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 1 ─────────────────────────────────────
+// No revisions due today. Proceed to the challenge below.
+// ─────────────────────────────────────────────────────────────────────
 // Day 1 — Running Balance (Easy)
 // Topic: Array Traversal + In-Place Accumulation
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A banking app that shows the running account balance
-  after each transaction is applied.
+  A banking app that displays the running account balance after each transaction is applied to the previous balance.
 
-Problem:
-  Given an array of integers, transform it so that each
-  element becomes the sum of all elements from index 0
-  up to and including that index.
-  Modify the array in place and return it.
+Conceptual Explanation:
+  Walk through the array once. At each position, instead of storing the original value, store the sum of all values from the beginning up to and including the current position. Each new value depends only on the value immediately before it — you never need to look further back than one step. Because each element only depends on its neighbor, you can update the array as you walk forward without needing a second array to hold intermediate results.
+
+Input:
+  An array of integers representing individual transactions (deposits as positive, withdrawals as negative).
+
+Output:
+  The same array modified so each position holds the running total up to that index.
 
 Example:
   Input:  [100, -20, 50, -30, 10]
   Output: [100, 80, 130, 100, 110]
-  Conceptual Explanation:    100 → 100+(-20)=80 → 80+50=130 → 130-30=100 → 100+10=110
+  Why:    100 stays. 100+(-20)=80. 80+50=130. 130-30=100. 100+10=110.
 
 Constraints:
-  - 1 <= nums.length <= 1000
-  - -1000 <= nums[i] <= 1000
+  - 1 <= array length <= 1000
+  - -1000 <= each value <= 1000
 
 Hint:
-  You don't need a second array. Each element only depends
-  on the element directly before it. Can you update in place
-  as you walk forward from index 1?
+  You only need one extra variable — a running total that starts at zero. Walk forward from the first element. At each step add the current element to your running total, then store that total back into the array at the current position. Return the array when done.
 */
 
-const runningBalance = (nums) => {
+const RunningBalance = (nums) => {
   // your solution here
 };
 
-console.log(JSON.stringify(runningBalance([100, -20, 50, -30, 10]))); // [100,80,130,100,110]
-console.log(JSON.stringify(runningBalance([1, 2, 3, 4]))); // [1,3,6,10]
-console.log(JSON.stringify(runningBalance([5]))); // [5]
+console.log(JSON.stringify(RunningBalance([100, -20, 50, -30, 10]))); // [100,80,130,100,110]
+console.log(JSON.stringify(RunningBalance([1, 2, 3, 4]))); // [1,3,6,10]
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 2 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 1/3 — Day 1: Running Balance (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 2 — Balance Point (Easy)
 // Topic: Prefix Sum + Total Tracking
 // Builds On: Day 1 (accumulating a running total while walking)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A warehouse shelf system checking whether a divider is
-  placed so that both sides carry equal total weight.
+  A warehouse shelf system checking whether a divider is placed so that both sides carry equal total weight.
 
-Problem:
-  Given an array of integers, find the index where the sum
-  of all elements to its left equals the sum of all elements
-  to its right. The element at that index is not included
-  in either sum. Return the index, or -1 if none exists.
+Conceptual Explanation:
+  Before walking the array, compute the total sum of all elements. Then walk forward maintaining a left sum that starts at zero and grows as you pass each element. At every position the right sum can be derived instantly — it is the total minus the left sum minus the current element itself. This means you never need to re-sum the right side from scratch at each step. Compare left and right at every position. The moment they match, you have found the balance point.
+
+Input:
+  An array of integers.
+
+Output:
+  The index where the sum of all elements to its left equals the sum of all elements to its right. Return -1 if no such index exists. The element at the balance index itself is not counted on either side.
 
 Example:
-  Input:  [2, 3, 1, 5, 3, 2]
-  Output: 3
-  Conceptual Explanation:    For index 3, left sum (2+3+1)=6, right sum (3+2)=5, not equal. The correct balance point is index 3 in [1,7,3,6,5,6]: left sum (1+7+3)=11, right sum (5+6)=11, equal.
-
   Input:  [1, 7, 3, 6, 5, 6]
   Output: 3
-  Conceptual Explanation:    At index 3, the sum of elements to the left (1+7+3=11) equals the sum to the right (5+6=11), excluding the element at index 3 itself.
+  Why:    Left of index 3 = 1+7+3=11. Right of index 3 = 5+6=11. Equal.
+
+  Input:  [2, 1, -1]
+  Output: 0
+  Why:    Left of index 0 is empty = 0. Right = 1+(-1) = 0. Equal.
+
+  Input:  [1, 2, 3]
+  Output: -1
+  Why:    No index has equal left and right sums.
 
 Constraints:
-  - 1 <= nums.length <= 1000
-  - -1000 <= nums[i] <= 1000
+  - 1 <= array length <= 1000
+  - -1000 <= each value <= 1000
 
 Hint:
-  Compute the total sum before you start walking.
-  As you move forward, the left sum grows by nums[i-1].
-  The right sum is always: total - leftSum - nums[i].
-  No second pass needed.
+  Compute the total sum before you start walking. Keep a left sum variable starting at zero. At each index the right sum is always total minus left sum minus the current element. If left sum equals right sum return the current index. After checking, add the current element to the left sum before moving forward. If you finish the loop without a match return -1.
 */
 
-const balancePoint = (nums) => {
+const BalancePoint = (nums) => {
   // your solution here
 };
 
-console.log(balancePoint([1, 7, 3, 6, 5, 6])); // 3
-console.log(balancePoint([2, 1, -1])); // 0
-console.log(balancePoint([1, 2, 3])); // -1
+console.log(BalancePoint([1, 7, 3, 6, 5, 6])); // 3
+console.log(BalancePoint([2, 1, -1])); // 0
+console.log(BalancePoint([1, 2, 3])); // -1
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 3 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 1/3 — Day 2: Balance Point (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 3 — Push to Back (Easy)
 // Topic: In-Place Write Pointer
 // Builds On: Day 2 (walking with a tracked index variable)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A photo editor that pushes empty (transparent) layers to
-  the end of the stack without changing the order of
-  visible layers.
+  A photo editor that pushes empty transparent layers to the end of the stack without changing the order of visible layers.
 
-Problem:
-  Given an array of integers, move all 0s to the end while
-  maintaining the relative order of all non-zero elements.
-  Do this in place — do not create a new array.
+Conceptual Explanation:
+  Use two conceptual pointers moving through the array — a read pointer that visits every element, and a write pointer that tracks the next available position for a non-zero value. Walk the read pointer forward. Every time it lands on a non-zero value, copy that value to the position the write pointer is pointing at, then advance the write pointer. When the read pointer finishes, every position from the write pointer to the end of the array should be filled with zero. The relative order of non-zero elements is preserved because you always write them in the order you encounter them.
+
+Input:
+  An array of integers that may contain zeros.
+
+Output:
+  The same array modified in place so all zeros are at the end and all non-zero elements appear at the front in their original relative order.
 
 Example:
   Input:  [0, 1, 0, 3, 12]
   Output: [1, 3, 12, 0, 0]
-  Conceptual Explanation:    The non-zero elements (1, 3, 12) maintain their relative order from the original array, while all zeros are moved to the end.
+  Why:    Non-zeros 1, 3, 12 keep their order. Zeros move to the end.
 
 Constraints:
-  - 1 <= nums.length <= 1000
-  - 0 <= nums[i] <= 1000
+  - 1 <= array length <= 1000
+  - 0 <= each value <= 1000
 
 Hint:
-  Use a write pointer starting at 0. Walk a read pointer
-  through the array. Every time you see a non-zero, place
-  it at the write pointer and advance it. What do you
-  fill in for the remaining positions at the end?
+  Declare a write pointer starting at index zero. Walk a read pointer through every index. When the current element is not zero, write it into the array at the write pointer position and advance the write pointer by one. After the first loop ends, run a second loop from the write pointer to the end of the array and set every remaining position to zero. Return the array.
 */
 
-const pushToBack = (nums) => {
+const PushtoBack = (nums) => {
   // your solution here
 };
 
-console.log(JSON.stringify(pushToBack([0, 1, 0, 3, 12]))); // [1,3,12,0,0]
-console.log(JSON.stringify(pushToBack([0, 0, 1]))); // [1,0,0]
-console.log(JSON.stringify(pushToBack([1, 2, 3]))); // [1,2,3]
+console.log(JSON.stringify(PushtoBack([0, 1, 0, 3, 12]))); // [1,3,12,0,0]
+console.log(JSON.stringify(PushtoBack([0, 0, 1]))); // [1,0,0]
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 4 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 1/3 — Day 3: Push to Back (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 4 — Increment Digits (Easy)
 // Topic: Backward Traversal + Carry Logic
-// Builds On: Day 3 (direction of traversal matters; here: backwards)
-// ────────────────────────────────────────────────────────────
+// Builds On: Day 3 (direction of traversal matters)
 /*
 Real World:
-  A build system stores version numbers as arrays of digits.
-  When a build completes, the version is incremented by 1.
+  A build system stores version numbers as arrays of digits. When a build completes the version is incremented by one.
 
-Problem:
-  Given a non-empty array of digits representing a non-negative
-  integer, increment the integer by one and return the result
-  as an array of digits. The digits are stored in order from
-  most significant to least significant.
+Conceptual Explanation:
+  Start from the last digit and work backwards. Adding one to a digit only causes a carry when that digit is nine — it becomes zero and the carry moves left. If the digit is less than nine you can simply add one and stop immediately because no carry is needed. The only case where you need to extend the array is when every digit was nine, producing all zeros with a one prepended at the front.
+
+Input:
+  An array of single digits representing a non-negative integer, stored most significant digit first with no leading zeros.
+
+Output:
+  An array of digits representing the original number plus one.
 
 Example:
   Input:  [1, 2, 9]
   Output: [1, 3, 0]
-  Conceptual Explanation:    The number represented by [1,2,9] is 129; incrementing by 1 gives 130, which is [1,3,0].
+  Why:    9 becomes 0, carry adds 1 to 2 making 3.
 
   Input:  [9, 9, 9]
   Output: [1, 0, 0, 0]
-  Conceptual Explanation:    The number 999 incremented by 1 becomes 1000, requiring an additional digit at the most significant position.
+  Why:    All nines become zeros, a new leading 1 is added.
 
 Constraints:
-  - 1 <= digits.length <= 100
-  - 0 <= digits[i] <= 9
-  - The number does not have leading zeros
+  - 1 <= array length <= 100
+  - 0 <= each digit <= 9
+  - No leading zeros
 
 Hint:
-  Start from the last digit. If it's less than 9, add 1
-  and you're done. If it's 9, set it to 0 and carry the 1
-  to the left. The only case where you need a new array
-  element is if all digits were 9.
+  Start at the last index and walk backwards. If the current digit is less than nine, add one to it and return the array immediately — you are done. If it is nine, set it to zero and continue walking left to carry. If you exit the loop without returning, every digit was nine — prepend a one to the front of the array and return it.
 */
 
-const incrementDigits = (digits) => {
+const IncrementDigits = (nums) => {
   // your solution here
 };
 
-console.log(JSON.stringify(incrementDigits([1, 2, 9]))); // [1,3,0]
-console.log(JSON.stringify(incrementDigits([9, 9, 9]))); // [1,0,0,0]
-console.log(JSON.stringify(incrementDigits([0]))); // [1]
+console.log(JSON.stringify(IncrementDigits([1, 2, 9]))); // [1,3,0]
+console.log(JSON.stringify(IncrementDigits([9, 9, 9]))); // [1,0,0,0]
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 5 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 2/3 — Day 1: Running Balance (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 4: Increment Digits (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 5 — Best Trade (Easy)
 // Topic: Single Pass + Running State Variable
 // Builds On: Day 4 (one pass, one tracked variable that updates conditionally)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A stock trading app that highlights the single most
-  profitable day to buy and sell within a historical window.
-  You can only make one trade (one buy, one sell).
+  A stock trading app that highlights the single most profitable day to buy and sell within a historical window. You can only make one trade.
 
-Problem:
-  Given an array of prices where prices[i] is the price of
-  a stock on day i, return the maximum profit you can achieve.
-  You must buy before you sell. If no profit is possible,
-  return 0.
+Conceptual Explanation:
+  Walk through the prices once from left to right. Keep track of the lowest price you have seen so far. At every step calculate what the profit would be if you sold today at the current price having bought at the lowest price seen so far. Track the highest such profit encountered. You never need to look backwards because you always know the best buying opportunity up to the current day — it is stored in your running minimum variable.
+
+Input:
+  An array of prices where each element is the stock price on that day.
+
+Output:
+  The maximum profit achievable from one buy followed by one sell. Return zero if no profitable trade is possible.
 
 Example:
   Input:  [7, 1, 5, 3, 6, 4]
   Output: 5
-  Conceptual Explanation:    Buy on day 2 (price 1), sell on day 5 (price 6). Profit = 5.
+  Why:    Buy at price 1 on day 2, sell at price 6 on day 5. Profit = 5.
 
   Input:  [7, 6, 4, 3, 1]
   Output: 0
-  Conceptual Explanation:    Prices only decrease — no profitable trade exists.
+  Why:    Prices only decrease. No profitable trade exists.
 
 Constraints:
-  - 1 <= prices.length <= 10000
-  - 0 <= prices[i] <= 10000
+  - 1 <= array length <= 10000
+  - 0 <= each price <= 10000
 
 Hint:
-  You don't need to check every pair. Walk forward and track
-  the lowest price seen so far. At each step, ask: what would
-  my profit be if I sold today? Track the maximum of those
-  potential profits.
+  Keep two variables — the lowest price seen so far and the maximum profit seen so far, both starting appropriately. Walk forward through every price. At each step first check if the current price minus the lowest price beats the current max profit and update if so. Then check if the current price is lower than your tracked minimum and update if so. Return the maximum profit after the loop.
 */
 
-const bestTrade = (prices) => {
+const BestTrade = (nums) => {
   // your solution here
 };
 
-console.log(bestTrade([7, 1, 5, 3, 6, 4])); // 5
-console.log(bestTrade([7, 6, 4, 3, 1])); // 0
-console.log(bestTrade([2, 4, 1])); // 2
+console.log(BestTrade([7, 1, 5, 3, 6, 4])); // 5
+console.log(BestTrade([7, 6, 4, 3, 1])); // 0
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 6 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 2/3 — Day 2: Balance Point (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 5: Best Trade (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 6 — Deduplicate Sorted (Easy)
 // Topic: Two Pointers — Slow Write / Fast Read
 // Builds On: Day 5 (two variables; now both are indices moving forward)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A database system removing duplicate user IDs from a
-  sorted list before writing to a unique-constraint table.
-  No extra array allowed — memory is tight.
+  A database system removing duplicate user IDs from a sorted list before writing to a unique-constraint table. No extra array allowed.
 
-Problem:
-  Given a sorted array of integers, remove duplicates
-  in place so that each unique value appears only once.
-  Return the number of unique elements. The first k
-  elements of the array should hold the unique values
-  in order (the rest doesn't matter).
+Conceptual Explanation:
+  Because the array is sorted, all duplicates of any value sit directly next to each other. Use a slow pointer to track the boundary of the deduplicated section — the last confirmed unique position. Use a fast pointer to scan every element. When the fast pointer finds a value different from what is at the slow pointer, that value is new and unique — copy it to the position just after the slow pointer and advance the slow pointer. When the fast pointer has visited every element the slow pointer tells you how many unique values exist.
+
+Input:
+  A sorted array of integers in non-decreasing order.
+
+Output:
+  The count of unique elements. The first that many positions of the array should contain the unique values in order.
 
 Example:
   Input:  [1, 1, 2, 3, 3, 4]
-  Output: 4  (array becomes [1, 2, 3, 4, ...])
-  Conceptual Explanation:    4 unique values: 1, 2, 3, 4
+  Output: 4
+  Why:    Four unique values: 1, 2, 3, 4 placed at the first four positions.
 
 Constraints:
-  - 1 <= nums.length <= 1000
+  - 1 <= array length <= 1000
   - Array is sorted in non-decreasing order
 
 Hint:
-  Because the array is sorted, duplicates are always
-  adjacent. A slow pointer tracks the last unique position
-  written. A fast pointer scans ahead. When fast finds a
-  value different from slow, copy it to slow+1 and advance
-  slow.
+  Start the slow pointer at index zero. Walk the fast pointer from index one to the end. Whenever the value at the fast pointer differs from the value at the slow pointer, advance the slow pointer by one and copy the fast pointer value into that new slow pointer position. Return slow pointer plus one as the count of unique elements.
 */
 
-const deduplicateSorted = (nums) => {
+const DeduplicateSorted = (nums) => {
   // your solution here
 };
 
-console.log(deduplicateSorted([1, 1, 2, 3, 3, 4])); // 4
-console.log(deduplicateSorted([1, 1, 1])); // 1
-console.log(deduplicateSorted([1, 2, 3])); // 3
+console.log(DeduplicateSorted([1, 1, 2, 3, 3, 4])); // 4
+console.log(DeduplicateSorted([1, 2, 3])); // 3
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 7 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 2/3 — Day 3: Push to Back (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 6: Deduplicate Sorted (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 7 — Peak Streak (Easy)
 // Topic: Kadane's Algorithm — Two State Variables
 // Builds On: Day 6 (two variables; now: current streak + best streak)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A sales analytics tool finding the highest-performing
-  consecutive stretch of days in a monthly revenue log.
+  A sales analytics tool finding the highest-performing consecutive stretch of days in a monthly revenue log.
 
-Problem:
-  Given an array of integers (which can be negative), find
-  the contiguous subarray that has the largest sum and
-  return that sum. The array will have at least one element.
+Conceptual Explanation:
+  Walk through the array once keeping two variables — the best sum ending at the current position and the best sum seen anywhere so far. At every element you face a choice: is it better to extend the current streak by adding this element to it, or to abandon the streak and start fresh from this element alone? Whichever is larger becomes the new current streak. Then check if this new current streak beats the overall best. This works because if the running sum ever goes negative it can only hurt any future subarray so it is better to restart.
+
+Input:
+  An array of integers which may include negative values. At least one element is present.
+
+Output:
+  The largest sum achievable from any contiguous subarray.
 
 Example:
   Input:  [-2, 1, -3, 4, -1, 2, 1, -5, 4]
   Output: 6
-  Conceptual Explanation:    The subarray [4, -1, 2, 1] has the largest sum = 6.
+  Why:    The subarray [4, -1, 2, 1] has sum 6.
 
   Input:  [-1, -2, -3]
   Output: -1
-  Conceptual Explanation:    All negative — best single element is -1.
+  Why:    All negative — the best single element is -1.
 
 Constraints:
-  - 1 <= nums.length <= 1000
-  - -1000 <= nums[i] <= 1000
+  - 1 <= array length <= 1000
+  - -1000 <= each value <= 1000
 
 Hint:
-  Walk forward with two variables: currentSum and maxSum.
-  At each step ask: is it better to extend the current
-  streak (currentSum + nums[i]) or start fresh (nums[i])?
-  Take the larger one. Update maxSum whenever currentSum
-  beats it.
+  Initialize current sum and max sum both to the first element. Walk from the second element to the end. At each step set current sum to the larger of the current element alone versus current sum plus the current element. Then set max sum to the larger of max sum and current sum. Return max sum after the loop.
 */
 
-const peakStreak = (nums) => {
+const PeakStreak = (nums) => {
   // your solution here
 };
 
-console.log(peakStreak([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // 6
-console.log(peakStreak([-1, -2, -3])); // -1
-console.log(peakStreak([1])); // 1
+console.log(PeakStreak([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // 6
+console.log(PeakStreak([-1, -2, -3])); // -1
 
 // ════════════════════════════════════════════════════════════
 //  WEEK 2 — String Manipulation (Days 8–14)
-//
-//  Thread: Builds on Week 1 patterns (two pointers, write pointer,
-//          state tracking) — applied now to strings.
-//    Day 8  → two pointer swap on a string
-//    Day 9  → two pointer + cleaning step
-//    Day 10 → character frequency with an object
-//    Day 11 → two-pass frequency (count then search)
-//    Day 12 → shrink a candidate string
-//    Day 13 → split, transform each piece, rejoin
-//    Day 14 → two pointers on two different strings
+//  Thread: Builds on Week 1 patterns applied to strings.
+//  Two pointers, frequency objects, split/transform/join,
+//  and multi-string pointer work.
 // ════════════════════════════════════════════════════════════
-
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 8 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 2/3 — Day 4: Increment Digits (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 7: Peak Streak (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 8 — Mirror Text (Easy)
-// Topic: Two Pointer Swap on Array/String
+// Topic: Two Pointer Swap
 // Builds On: Day 6 two-pointer idea — now pointers move toward each other
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A mobile keyboard's "flip text" feature that reverses
-  whatever the user has typed.
+  A mobile keyboard flip text feature that reverses whatever the user has typed.
 
-Problem:
-  Given an array of characters, reverse it in place.
-  Do not return a new array — modify the input directly.
+Conceptual Explanation:
+  Place one pointer at the very beginning of the array and one at the very end. Swap the values at both positions. Then move the left pointer one step right and the right pointer one step left. Repeat until the two pointers meet or cross. At that point every element has been swapped with its mirror and the array is fully reversed.
+
+Input:
+  An array of characters.
+
+Output:
+  The same array reversed in place. No new array should be created.
 
 Example:
-  Input:  ["h", "e", "l", "l", "o"]
-  Output: ["o", "l", "l", "e", "h"]
-  Conceptual Explanation:    The characters are reversed in place, making the array read backwards.
+  Input:  ["h","e","l","l","o"]
+  Output: ["o","l","l","e","h"]
+  Why:    Each character swapped with its mirror.
 
 Constraints:
-  - 1 <= chars.length <= 10000
+  - 1 <= array length <= 10000
   - Each element is a single printable ASCII character
 
 Hint:
-  Place one pointer at index 0 and one at the last index.
-  Swap the values they point to, then move them toward
-  each other. Stop when they meet or cross.
+  Start with left at index zero and right at the last index. While left is less than right swap the values at those two positions then move left forward one step and right backward one step. Stop when they meet or cross. Return the array.
 */
 
-const mirrorText = (chars) => {
+const MirrorText = (input) => {
   // your solution here
 };
 
 const a = ["h", "e", "l", "l", "o"];
-mirrorText(a);
-console.log(JSON.stringify(a)); // ["o","l","l","e","h"]
+MirrorText(a);
+console.log(JSON.stringify(a)); // ['o','l','l','e','h']
 
-const b = ["A", "B", "C", "D"];
-mirrorText(b);
-console.log(JSON.stringify(b)); // ["D","C","B","A"]
-
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 9 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 2/3 — Day 5: Best Trade (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 8: Mirror Text (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 9 — Read Both Ways (Easy)
 // Topic: Two Pointer + String Normalization
-// Builds On: Day 8 (two pointer moving inward) + a cleaning step first
-// ────────────────────────────────────────────────────────────
+// Builds On: Day 8 (two pointer moving inward) plus a cleaning step first
 /*
 Real World:
-  A search engine normalizing user queries to check whether
-  a phrase reads the same forwards and backwards, ignoring
-  punctuation and casing.
+  A search engine normalizing user queries to check whether a phrase reads the same forwards and backwards, ignoring punctuation and casing.
 
-Problem:
-  Given a string, determine whether it is a palindrome
-  after removing all non-alphanumeric characters and
-  converting to lowercase. Return true or false.
+Conceptual Explanation:
+  First produce a cleaned version of the string containing only letters and digits all converted to lowercase. Then apply the two-pointer technique from the previous challenge — one pointer at each end moving inward — but instead of swapping, compare. If the characters at both pointers match, move both inward. If they ever differ the string is not a palindrome. If the pointers meet without finding a mismatch it is a palindrome.
+
+Input:
+  A string of printable ASCII characters.
+
+Output:
+  True if the string is a palindrome after removing non-alphanumeric characters and lowercasing. False otherwise.
 
 Example:
-  Input:  "A man, a plan, a canal: Panama"
+  Input:  'A man, a plan, a canal: Panama'
   Output: true
-  Conceptual Explanation:    Cleaned → "amanaplanacanalpanama" — reads same both ways.
+  Why:    Cleaned becomes 'amanaplanacanalpanama' which reads the same both ways.
 
-  Input:  "race a car"
+  Input:  'race a car'
   Output: false
-  Conceptual Explanation:    Cleaned → "raceacar" — not a palindrome.
+  Why:    Cleaned becomes 'raceacar' which is not a palindrome.
 
 Constraints:
-  - 1 <= s.length <= 100000
-  - s consists of printable ASCII characters
+  - 1 <= string length <= 100000
 
 Hint:
-  Clean the string first — keep only letters and numbers,
-  lowercase everything. Then apply the two-pointer swap
-  check from Day 8: instead of swapping, compare.
-  Stop as soon as you find a mismatch.
+  Clean the string first by keeping only alphanumeric characters and converting to lowercase. Then use two pointers starting at each end and moving inward. At each step compare the characters at both pointers. If they differ return false. If the pointers meet return true.
 */
 
-const readBothWays = (s) => {
+const ReadBothWays = (input) => {
   // your solution here
 };
 
-console.log(readBothWays("A man, a plan, a canal: Panama")); // true
-console.log(readBothWays("race a car")); // false
-console.log(readBothWays(" ")); // true
+console.log(ReadBothWays("A man, a plan, a canal: Panama")); // true
+console.log(ReadBothWays("race a car")); // false
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 10 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 1: Running Balance (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 6: Deduplicate Sorted (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 9: Read Both Ways (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 10 — Same Letters (Easy)
 // Topic: Character Frequency Object
 // Builds On: Day 7 state tracking — now tracking counts in an object
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A plagiarism detector checking whether two short texts
-  use exactly the same characters — just rearranged.
+  A plagiarism detector checking whether two short texts use exactly the same characters just rearranged.
 
-Problem:
-  Given two strings s and t, return true if t is an anagram
-  of s (contains the exact same characters in any order),
-  and false otherwise.
+Conceptual Explanation:
+  Two strings are anagrams if and only if they have identical character frequencies. Build a tally of every character in the first string using an object where each key is a character and each value is its count. Then walk the second string and for each character decrement its count in the tally. If any count drops below zero that character appears more in the second string than the first — not an anagram. If the strings have different lengths they cannot be anagrams regardless of content.
+
+Input:
+  Two strings.
+
+Output:
+  True if the second string is an anagram of the first — same characters same counts different order. False otherwise.
 
 Example:
-  Input:  s = "anagram", t = "nagaram"
+  Input:  'anagram', 'nagaram'
   Output: true
-  Conceptual Explanation:    Both strings have identical character counts, so t is an anagram of s.
+  Why:    Both use the same characters with the same frequencies.
 
-  Input:  s = "rat", t = "car"
+  Input:  'rat', 'car'
   Output: false
+  Why:    Different characters.
 
 Constraints:
-  - 1 <= s.length, t.length <= 50000
+  - 1 <= string lengths <= 50000
   - Strings consist of lowercase English letters
 
 Hint:
-  Two strings are anagrams if they have the same character
-  frequencies. Build a frequency object from s (increment),
-  then walk t (decrement). If any count goes negative, or
-  if the strings have different lengths, it's not an anagram.
+  Check lengths first — if different return false immediately. Build a frequency object from the first string by incrementing counts. Walk the second string decrementing counts. If any count goes below zero return false. Return true if you complete the walk without issue.
 */
 
-const sameLetters = (s, t) => {
+const SameLetters = (nums) => {
   // your solution here
 };
 
-console.log(sameLetters("anagram", "nagaram")); // true
-console.log(sameLetters("rat", "car")); // false
-console.log(sameLetters("ab", "a")); // false
+console.log(SameLetters("anagram", "nagaram")); // true
+console.log(SameLetters("rat", "car")); // false
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 11 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 2: Balance Point (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 7: Peak Streak (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 10: Same Letters (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 11 — First Solo (Easy)
-// Topic: Two-Pass Frequency (Count Then Search)
-// Builds On: Day 10 (frequency object) — now you do two passes with it
-// ────────────────────────────────────────────────────────────
+// Topic: Two-Pass Frequency
+// Builds On: Day 10 (frequency object) — now two passes with it
 /*
 Real World:
-  A live chat app that highlights the first emoji in a
-  message that was used only once — a quick uniqueness signal.
+  A live chat app that highlights the first emoji in a message that was used only once.
 
-Problem:
-  Given a string, find the index of the first character
-  that appears exactly once. Return its index, or -1 if
-  every character repeats.
+Conceptual Explanation:
+  Two passes through the string with one frequency object. The first pass counts how many times every character appears. The second pass walks the string again in order and returns the index of the first character whose count is exactly one. The order of the second pass matters — you must find the first occurrence in the original string, not just any character with count one.
+
+Input:
+  A string.
+
+Output:
+  The index of the first character that appears exactly once. Return -1 if every character appears more than once.
 
 Example:
-  Input:  "leetcode"
+  Input:  'leetcode'
   Output: 0
-  Conceptual Explanation:    'l' appears once and is the first such character.
+  Why:    The character l appears once and is at index zero.
 
-  Input:  "aabb"
+  Input:  'aabb'
   Output: -1
-  Conceptual Explanation:    All characters repeat.
+  Why:    Every character appears twice.
 
 Constraints:
-  - 1 <= s.length <= 100000
-  - s consists of lowercase English letters
+  - 1 <= string length <= 100000
+  - Consists of lowercase English letters
 
 Hint:
-  Pass 1: build a frequency object counting every character.
-  Pass 2: walk the string again. Return the index of the
-  first character whose count is exactly 1.
-  Two passes, one object — no nested loops needed.
+  First pass — walk the entire string and build a frequency object counting every character. Second pass — walk the string again from the beginning. Return the index of the first character whose frequency count is exactly one. If no such character exists return -1.
 */
 
-const firstSolo = (s) => {
+const FirstSolo = (nums) => {
   // your solution here
 };
 
-console.log(firstSolo("leetcode")); // 0
-console.log(firstSolo("loveleet")); // 2
-console.log(firstSolo("aabb")); // -1
+console.log(FirstSolo("leetcode")); // 0
+console.log(FirstSolo("aabb")); // -1
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 12 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 3: Push to Back (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 8: Mirror Text (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 11: First Solo (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 12 — Shared Start (Easy)
 // Topic: Candidate Shrinking
 // Builds On: Day 11 (scanning multiple strings; now comparing across them)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  An autocomplete feature that finds the longest shared
-  prefix across all matching search suggestions, so it can
-  pre-fill that much in the input field.
+  An autocomplete feature that finds the longest shared prefix across all matching search suggestions so it can pre-fill that portion in the input field.
 
-Problem:
-  Given an array of strings, find the longest common prefix
-  shared by all of them. If no common prefix exists, return
-  an empty string "".
+Conceptual Explanation:
+  Take the first string as your candidate prefix. Compare it against each subsequent string. If the current string does not start with the candidate, remove one character from the end of the candidate and compare again. Keep shrinking until the current string starts with the candidate or the candidate becomes empty. After checking every string whatever remains in the candidate is the longest common prefix.
+
+Input:
+  An array of strings.
+
+Output:
+  The longest string that is a prefix of every string in the array. An empty string if no common prefix exists.
 
 Example:
-  Input:  ["flower", "flow", "flight"]
+  Input:  ["flower","flow","flight"]
   Output: "fl"
-  Conceptual Explanation: All three strings begin with "fl", making it the longest common prefix.
+  Why:    fl is the longest prefix shared by all three.
 
-  Input:  ["dog", "racecar", "car"]
+  Input:  ["dog","racecar","car"]
   Output: ""
-  Conceptual Explanation: These strings share no common starting characters.
+  Why:    No common prefix.
 
 Constraints:
-  - 1 <= strs.length <= 200
-  - 0 <= strs[i].length <= 200
+  - 1 <= array length <= 200
+  - 0 <= each string length <= 200
   - Strings consist of lowercase English letters
 
 Hint:
-  Take the first string as your candidate prefix.
-  Loop through every other string. If the current string
-  does not start with your candidate, shorten the candidate
-  by one character from the end. Repeat until it does.
-  If the candidate becomes empty, return "".
+  Take the first string as the candidate. Loop through every other string. While the current string does not start with the candidate, remove the last character from the candidate. If the candidate becomes empty return an empty string immediately. Return whatever remains in the candidate after all strings are checked.
 */
 
-const sharedStart = (strs) => {
+const SharedStart = (nums) => {
   // your solution here
 };
 
-console.log(sharedStart(["flower", "flow", "flight"])); // "fl"
-console.log(sharedStart(["dog", "racecar", "car"])); // ""
-console.log(sharedStart(["interview", "inter", "interlude"])); // "inter"
+console.log(SharedStart(["flower", "flow", "flight"])); // 'fl'
+console.log(SharedStart(["dog", "racecar", "car"])); // ''
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 13 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 4: Increment Digits (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 9: Read Both Ways (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 12: Shared Start (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 13 — Word Flip (Easy)
-// Topic: Split → Map Transform → Join
+// Topic: Split Map Transform Join
 // Builds On: Day 8 (reversing) — now applied to each word individually
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A subtitle formatting tool that reverses the letters of
-  every word in a line without changing the order of words.
+  A subtitle formatting tool that reverses the letters of every word in a line without changing the order of words.
 
-Problem:
-  Given a string s, reverse the characters of each word
-  individually while preserving whitespace and word order.
+Conceptual Explanation:
+  The problem naturally breaks into three steps. First separate the string into individual words. Then transform each word by reversing its characters — the same mirror technique from the previous challenge but applied to each word independently. Finally reassemble the transformed words back into a single string with spaces between them. Each step is a distinct operation and JavaScript array methods make the chain clean and readable.
+
+Input:
+  A string of words separated by single spaces.
+
+Output:
+  A string where every word has its characters reversed but words remain in their original order.
 
 Example:
   Input:  "Let's take LeetCode contest"
   Output: "s'teL ekat edoCteeL tsetnoC"
-  Conceptual Explanation:    Each word is reversed individually while the word order stays the same.
-
-  Input:  "Hello World"
-  Output: "olleH dlroW"
+  Why:    Each word reversed individually, order unchanged.
 
 Constraints:
-  - 1 <= s.length <= 5000
-  - s contains printable ASCII characters and spaces
-  - Words are separated by single spaces
+  - 1 <= string length <= 5000
+  - Words separated by single spaces
 
 Hint:
-  Split on spaces to get an array of words.
-  Map over each word — for each one, apply the reversal
-  logic you built in Day 8 (or use split/reverse/join).
-  Then join the transformed words back with spaces.
-  This chain should be readable as a single expression.
+  Split the string on spaces to get an array of words. Map over the array reversing each word's characters individually. Join the resulting array back with spaces between words and return the result.
 */
 
-const wordFlip = (s) => {
+const WordFlip = (input) => {
   // your solution here
 };
 
-console.log(wordFlip("Let's take LeetCode contest")); // "s'teL ekat edoCteeL tsetnoC"
-console.log(wordFlip("Hello World")); // "olleH dlroW"
-console.log(wordFlip("a")); // "a"
+console.log(WordFlip("Let's take LeetCode contest")); // "s'teL ekat edoCteeL tsetnoC"
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 14 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 5: Best Trade (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 10: Same Letters (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 13: Word Flip (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 14 — In Order (Easy)
 // Topic: Two Pointers on Two Different Strings
 // Builds On: Day 6 (two pointers) — now each pointer lives in a different string
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A keyboard input validator checking whether a user's
-  shortcut keystrokes appear — in order — within a longer
-  recorded input sequence.
+  A keyboard input validator checking whether a user's shortcut keystrokes appear in order within a longer recorded input sequence.
 
-Problem:
-  Given strings s and t, return true if s is a subsequence
-  of t. A subsequence is formed by deleting some (or no)
-  characters from t without changing the order of remaining
-  characters.
+Conceptual Explanation:
+  Use two separate pointers — one for each string. Walk the longer string forward always, one character at a time. Only advance the pointer in the shorter string when the current character in the longer string matches the current character in the shorter string. If the shorter string's pointer reaches the end all its characters were found in order — it is a subsequence. If the longer string's pointer reaches the end first and the shorter pointer has not finished then it is not a subsequence.
+
+Input:
+  Two strings — a shorter pattern string and a longer target string.
+
+Output:
+  True if every character in the pattern appears in the target in the same relative order. False otherwise.
 
 Example:
-  Input:  s = "ace", t = "abcde"
+  Input:  'ace', 'abcde'
   Output: true
-  Conceptual Explanation:    a→b→c→d→e — we can pick a, c, e in order.
+  Why:    a then c then e all appear in order within abcde.
 
-  Input:  s = "aec", t = "abcde"
+  Input:  'aec', 'abcde'
   Output: false
-  Conceptual Explanation:    'e' comes after 'c' in t, so aec can't be picked in order.
+  Why:    e comes after c in the target so aec cannot be found in order.
 
 Constraints:
-  - 0 <= s.length <= 100
-  - 0 <= t.length <= 10000
-  - Both strings consist of lowercase English letters
+  - 0 <= pattern length <= 100
+  - 0 <= target length <= 10000
+  - Both consist of lowercase English letters
 
 Hint:
-  Two separate pointers — one for s, one for t.
-  Walk t forward always. Only advance the s pointer
-  when s[sPointer] === t[tPointer]. If the s pointer
-  reaches s.length, you found all characters in order.
+  Start both pointers at zero. Walk the target pointer forward on every iteration. Only advance the pattern pointer when the current target character matches the current pattern character. Return true if the pattern pointer reaches the length of the pattern. Return false if the target pointer reaches the end first.
 */
 
-const inOrder = (s, t) => {
+const InOrder = (input) => {
   // your solution here
 };
 
-console.log(inOrder("ace", "abcde")); // true
-console.log(inOrder("aec", "abcde")); // false
-console.log(inOrder("", "ahbgdc")); // true
+console.log(InOrder("ace", "abcde")); // true
+console.log(InOrder("aec", "abcde")); // false
 
 // ════════════════════════════════════════════════════════════
 //  WEEK 3 — Objects & Hash Maps (Days 15–21)
-//
-//  Thread: Builds on the frequency object from Week 2.
-//    Day 15 → one-pass object lookup (complement search)
-//    Day 16 → Set for existence checking
-//    Day 17 → XOR as a lookup-free alternative
-//    Day 18 → frequency object with a threshold check
-//    Day 19 → Set intersection across two arrays
-//    Day 20 → bidirectional object mapping
-//    Day 21 → bidirectional mapping variation
+//  Thread: Frequency objects evolve into complement lookup,
+//  Set operations, XOR alternatives, and bidirectional maps.
 // ════════════════════════════════════════════════════════════
-
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 15 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 6: Deduplicate Sorted (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 11: First Solo (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 14: In Order (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 15 — Two Sum (Easy)
-// Topic: One-Pass Hash Map (Complement Lookup)
-// Builds On: Day 10 frequency object — now you check the object as you build it
-// ────────────────────────────────────────────────────────────
+// Topic: One-Pass Hash Map
+// Builds On: Day 10 (frequency object) — now checking the object as you build it
 /*
 Real World:
-  An e-commerce checkout system finding two items in a
-  cart whose combined price hits an exact promotional
-  discount threshold.
+  An e-commerce checkout system finding two items in a cart whose combined price hits an exact promotional discount threshold.
 
-Problem:
-  Given an array of integers and a target number, return
-  the indices of the two numbers that add up to the target.
-  Exactly one solution exists. You may not use the same
-  element twice.
+Conceptual Explanation:
+  For every number in the array its pair would be the target minus that number — called the complement. Instead of checking every possible pair with nested loops, store each number you have already visited in an object as you walk forward. Before storing the current number check whether its complement already exists in the object. If it does you have found both numbers in the pair. This works in a single pass because by the time you check for the complement of any number you have already stored all earlier numbers.
+
+Input:
+  An array of integers and a target integer.
+
+Output:
+  An array containing the two indices whose values add up to the target. Exactly one solution always exists.
 
 Example:
-  Input:  nums = [2, 7, 11, 15], target = 9
+  Input:  [2, 7, 11, 15], target=9
   Output: [0, 1]
-  Conceptual Explanation:    nums[0] + nums[1] = 2 + 7 = 9
+  Why:    Value at index 0 is 2 and at index 1 is 7. 2+7=9.
 
-  Input:  nums = [3, 2, 4], target = 6
+  Input:  [3, 2, 4], target=6
   Output: [1, 2]
-  Conceptual Explanation:    The first and third numbers add to the target 6, so return their 1-based indices.
+  Why:    Value at index 1 is 2 and at index 2 is 4. 2+4=6.
 
 Constraints:
-  - 2 <= nums.length <= 10000
-  - -10000 <= nums[i] <= 10000
+  - 2 <= array length <= 10000
   - Exactly one valid solution exists
+  - Cannot use the same element twice
 
 Hint:
-  For each number, its complement is target - num.
-  Store numbers you've already seen in an object (key: number,
-  value: index). Before storing each number, check if its
-  complement already exists in the object. If yes — you
-  found your pair. One pass, no nested loop.
+  Create an empty object to store numbers you have seen along with their indices. Walk the array. For each element calculate its complement by subtracting it from the target. Check if that complement exists in the object. If it does return the complement's stored index and the current index. If not store the current element and its index in the object and continue.
 */
 
-const twoSum = (nums, target) => {
+const TwoSum = (nums) => {
   // your solution here
 };
 
-console.log(JSON.stringify(twoSum([2, 7, 11, 15], 9))); // [0,1]
-console.log(JSON.stringify(twoSum([3, 2, 4], 6))); // [1,2]
-console.log(JSON.stringify(twoSum([3, 3], 6))); // [0,1]
+console.log(JSON.stringify(TwoSum([2, 7, 11, 15], 9))); // [0,1]
+console.log(JSON.stringify(TwoSum([3, 2, 4], 6))); // [1,2]
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 16 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 7: Peak Streak (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 12: Shared Start (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 15: Two Sum (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 16 — Repeat Check (Easy)
 // Topic: Set for O(1) Existence Checking
 // Builds On: Day 15 (object for fast lookup) — Set is cleaner when you only need existence
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A form validator checking whether any email address
-  appears more than once in a submitted registration list.
+  A form validator checking whether any email address appears more than once in a submitted registration list.
 
-Problem:
-  Given an array of integers, return true if any value
-  appears at least twice in the array, and false if all
-  elements are distinct.
+Conceptual Explanation:
+  A Set is a collection that only holds unique values — attempting to add a value that already exists has no effect on the Set's size. Walk through the array and for each element check whether it already exists in the Set before adding it. If it does you have found a duplicate. Alternatively add every element to a Set and compare the resulting Set size to the original array length — if they differ duplicates existed.
+
+Input:
+  An array of integers.
+
+Output:
+  True if any value appears at least twice. False if all values are distinct.
 
 Example:
   Input:  [1, 2, 3, 1]
   Output: true
-  Conceptual Explanation:    The value 1 appears more than once.
+  Why:    The value 1 appears at index 0 and index 3.
 
   Input:  [1, 2, 3, 4]
   Output: false
-  Conceptual Explanation:    Every value is unique; no duplicates exist.
+  Why:    All values appear exactly once.
 
 Constraints:
-  - 1 <= nums.length <= 100000
-  - -100000 <= nums[i] <= 100000
+  - 1 <= array length <= 100000
+  - -100000 <= each value <= 100000
 
 Hint:
-  A Set only stores unique values. As you add elements,
-  check before adding: if the element is already in the
-  Set, you've found a duplicate. Alternatively: add all
-  elements to a Set and compare its size to the array length.
-  Understand both approaches.
+  Create an empty Set. Walk the array. For each element if it already exists in the Set return true — a duplicate was found. Otherwise add it to the Set and continue. If you finish the loop without finding a duplicate return false.
 */
 
-const repeatCheck = (nums) => {
+const RepeatCheck = (nums) => {
   // your solution here
 };
 
-console.log(repeatCheck([1, 2, 3, 1])); // true
-console.log(repeatCheck([1, 2, 3, 4])); // false
-console.log(repeatCheck([1, 1, 1, 3])); // true
+console.log(RepeatCheck([1, 2, 3, 1])); // true
+console.log(RepeatCheck([1, 2, 3, 4])); // false
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 17 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 8: Mirror Text (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 13: Word Flip (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 16: Repeat Check (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 17 — The Odd One Out (Easy)
 // Topic: XOR Bitwise Operation
 // Builds On: Day 16 (finding the unique element) — XOR does it without extra space
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  An inventory audit system where every product is scanned
-  exactly twice during a stocktake — except one item that
-  was damaged and only scanned once. Find the anomaly.
+  An inventory audit system where every product is scanned exactly twice during a stocktake except one item that was damaged and only scanned once.
 
-Problem:
-  Given an array where every element appears exactly twice
-  except for one element which appears exactly once,
-  return that single element.
+Conceptual Explanation:
+  The XOR bitwise operation has two useful properties. When you XOR a number with itself the result is zero. When you XOR any number with zero the result is that number unchanged. If you XOR every number in the array together all pairs will cancel each other out to zero leaving only the single unpaired number. The order in which you XOR the values does not matter.
+
+Input:
+  An array where every element appears exactly twice except for one element which appears exactly once.
+
+Output:
+  The single element that appears only once.
 
 Example:
   Input:  [4, 1, 2, 1, 2]
   Output: 4
-  Conceptual Explanation:    4 appears only once while every other value appears twice.
+  Why:    1 XOR 1 = 0, 2 XOR 2 = 0, leaving only 4.
 
   Input:  [2, 2, 1]
   Output: 1
-  Conceptual Explanation:    1 is the single element that does not have a duplicate.
+  Why:    2 XOR 2 = 0, leaving only 1.
 
 Constraints:
-  - 1 <= nums.length <= 30000
+  - 1 <= array length <= 30000
   - Array length is always odd
   - Every element except one appears exactly twice
 
 Hint:
-  XOR has two key properties:
-    n ^ n = 0 (a number XORed with itself cancels out)
-    n ^ 0 = n (a number XORed with 0 is itself)
-  XOR all elements together. Pairs cancel to 0.
-  What's left is the single element.
+  Start with a result variable set to zero. Walk the array and XOR every element into the result variable. Pairs will cancel to zero and the single unique element will remain. Return the result.
 */
 
-const oddOneOut = (nums) => {
+const TheOddOneOut = (nums) => {
   // your solution here
 };
 
-console.log(oddOneOut([4, 1, 2, 1, 2])); // 4
-console.log(oddOneOut([2, 2, 1])); // 1
-console.log(oddOneOut([1])); // 1
+console.log(TheOddOneOut([4, 1, 2, 1, 2])); // 4
+console.log(TheOddOneOut([2, 2, 1])); // 1
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 18 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 9: Read Both Ways (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 14: In Order (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 17: The Odd One Out (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 18 — Crowd Favorite (Easy)
 // Topic: Frequency Object + Majority Threshold
-// Builds On: Day 10/15 (frequency object) — now checking against a threshold
-// ────────────────────────────────────────────────────────────
+// Builds On: Day 10 and Day 15 (frequency object) — now checking against a threshold
 /*
 Real World:
-  A live audience poll dashboard finding the option that
-  more than half the audience voted for — guaranteed to exist.
+  A live audience poll dashboard finding the option that more than half the audience voted for.
 
-Problem:
-  Given an array of integers, find the element that appears
-  more than n/2 times (where n is the array length).
-  This element always exists in the input.
+Conceptual Explanation:
+  Build a frequency count of every element using an object. As you count each element check whether its current count exceeds half the array length. Because the majority element is guaranteed to exist you will always find it before or when you finish counting. There is also a space-efficient algorithm called Boyer-Moore Voting that solves this with only two variables — worth studying after completing the object approach.
+
+Input:
+  An array of integers. A majority element always exists — it appears more than half the total number of elements.
+
+Output:
+  The element that appears more than half the total number of times.
 
 Example:
   Input:  [3, 2, 3]
   Output: 3
-  Conceptual Explanation:    3 occurs more than half the time, so it is the majority element.
+  Why:    3 appears twice out of three elements — more than half.
 
   Input:  [2, 2, 1, 1, 1, 2, 2]
   Output: 2
-  Conceptual Explanation:    2 appears four times out of seven, which is more than any other number.
+  Why:    2 appears four times out of seven — more than half.
 
 Constraints:
-  - 1 <= nums.length <= 50000
+  - 1 <= array length <= 50000
   - The majority element always exists
 
 Hint:
-  Build a frequency object. For each number, if its count
-  exceeds Math.floor(nums.length / 2), return it.
-  You can do this in one pass — check the threshold as you
-  count, not after. After solving, look up Boyer-Moore
-  Voting Algorithm for a space-efficient alternative.
+  Create a frequency object. Walk the array incrementing each element's count. After each increment check if that count now exceeds half the array length. If so return that element immediately. If you complete the loop and have not returned look through the frequency object for the element with the highest count and return it.
 */
 
-const crowdFavorite = (nums) => {
+const CrowdFavorite = (nums) => {
   // your solution here
 };
 
-console.log(crowdFavorite([3, 2, 3])); // 3
-console.log(crowdFavorite([2, 2, 1, 1, 1, 2, 2])); // 2
-console.log(crowdFavorite([1])); // 1
+console.log(CrowdFavorite([3, 2, 3])); // 3
+console.log(CrowdFavorite([2, 2, 1, 1, 1, 2, 2])); // 2
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 19 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 10: Same Letters (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 15: Two Sum (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 18: Crowd Favorite (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 19 — Common Ground (Easy)
 // Topic: Set Intersection
 // Builds On: Day 16 (Set membership) — now applied across two separate arrays
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A social platform feature showing which users two people
-  both follow — their mutual connections.
+  A social platform feature showing which users two people both follow — their mutual connections.
 
-Problem:
-  Given two arrays of integers, return an array of their
-  intersection — the values that appear in both arrays.
-  Each value in the result must be unique.
+Conceptual Explanation:
+  Convert one array into a Set for fast existence checking. Walk the other array and keep only the elements that exist in the Set. This gives you the intersection but may include duplicates if the second array has repeated values. Convert the result to a Set to remove those duplicates then return it as an array. The key advantage of using a Set over an array for the lookup is that checking membership in a Set takes constant time regardless of its size.
+
+Input:
+  Two arrays of integers.
+
+Output:
+  An array of unique integers that appear in both input arrays. Order does not matter.
 
 Example:
-  Input:  nums1 = [1, 2, 2, 1], nums2 = [2, 2]
+  Input:  [1, 2, 2, 1], [2, 2]
   Output: [2]
-  Conceptual Explanation:    The only unique value present in both arrays is 2.
+  Why:    Only the value 2 appears in both arrays.
 
-  Input:  nums1 = [4, 9, 5], nums2 = [9, 4, 9, 8, 4]
-  Output: [9, 4]  (order doesn't matter)
-  Conceptual Explanation:    The values 9 and 4 appear in both arrays; duplicates are removed in the result.
+  Input:  [4, 9, 5], [9, 4, 9, 8, 4]
+  Output: [4, 9]
+  Why:    Values 4 and 9 appear in both.
 
 Constraints:
-  - 1 <= nums1.length, nums2.length <= 1000
-  - 0 <= nums1[i], nums2[i] <= 1000
+  - 1 <= each array length <= 1000
+  - 0 <= each value <= 1000
 
 Hint:
-  Convert one array to a Set. Filter the other array
-  keeping only values that exist in the Set.
-  Then convert the result to a Set again to remove
-  any duplicates in the filtered result.
-  Think about: why does a Set outperform Array.includes()
-  here for large inputs?
+  Convert the first array to a Set. Filter the second array keeping only elements that exist in that Set. Convert the filtered result to a new Set to eliminate duplicates then spread it back into an array and return it.
 */
 
-const commonGround = (nums1, nums2) => {
+const CommonGround = (nums) => {
   // your solution here
 };
 
-console.log(JSON.stringify(commonGround([1, 2, 2, 1], [2, 2]))); // [2]
-console.log(JSON.stringify(commonGround([4, 9, 5], [9, 4, 9, 8, 4]))); // [4,9] or [9,4]
+console.log(JSON.stringify(CommonGround([1, 2, 2, 1], [2, 2]))); // [2]
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 20 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 11: First Solo (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 16: Repeat Check (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 19: Common Ground (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 20 — Code Map (Easy)
 // Topic: Bidirectional Object Mapping
 // Builds On: Day 15 (single-direction map) — now the mapping must hold in both directions
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A cipher validator checking whether a secret code
-  consistently maps each code letter to exactly one word —
-  and each word maps back to exactly one code letter.
+  A cipher validator checking whether a secret code consistently maps each code letter to exactly one word and each word maps back to exactly one code letter.
 
-Problem:
-  Given a pattern string and a string s of space-separated
-  words, return true if s follows the same pattern.
-  "Follows" means there is a bijection between each letter
-  in pattern and each word in s.
+Conceptual Explanation:
+  A valid bijection requires that the relationship holds in both directions — one pattern character maps to exactly one word AND one word maps back to exactly one pattern character. Use two separate objects for the two directions. As you walk through each pair of corresponding characters and words check both maps. If a pattern character is already mapped to a different word the mapping is inconsistent. If a word is already mapped to a different pattern character the reverse mapping is inconsistent. Either failure means the answer is false.
+
+Input:
+  A pattern string of characters and a string of space-separated words. The number of words equals the length of the pattern.
+
+Output:
+  True if there is a consistent one-to-one mapping between each pattern character and each word. False otherwise.
 
 Example:
-  Input:  pattern = "abba", s = "dog cat cat dog"
+  Input:  'abba', 'dog cat cat dog'
   Output: true
-  Conceptual Explanation:    The pattern maps a→dog and b→cat consistently across the string.
+  Why:    a maps to dog, b maps to cat. Both directions consistent.
 
-  Input:  pattern = "abba", s = "dog cat cat fish"
+  Input:  'abba', 'dog cat cat fish'
   Output: false
-  Conceptual Explanation:    The last word should match the first word for the pattern to hold, but it does not.
+  Why:    a maps to dog but also to fish — inconsistent.
 
-  Input:  pattern = "aaaa", s = "dog cat cat dog"
+  Input:  'aaaa', 'dog cat cat dog'
   Output: false
-  Conceptual Explanation:    Pattern aaaa requires every word to be the same, but the words differ.
+  Why:    a maps to dog but dog maps back to multiple positions.
 
 Constraints:
-  - 1 <= pattern.length <= 300
-  - pattern contains only lowercase English letters
-  - s contains only lowercase English words separated by spaces
-  - The number of words equals the length of pattern
+  - 1 <= pattern length <= 300
+  - Number of words equals pattern length
+  - Pattern contains only lowercase letters
 
 Hint:
-  You need two maps: one from pattern char → word,
-  one from word → pattern char. Both directions must
-  be consistent. If a char maps to a different word
-  than expected, or a word maps to a different char,
-  return false.
+  Split the words string into an array. Create two empty objects — one mapping pattern characters to words and one mapping words to pattern characters. Walk through each index checking both mappings. If the pattern character is already mapped to a different word return false. If the word is already mapped to a different character return false. Otherwise record both mappings and continue. Return true if you complete the walk.
 */
 
-const codeMap = (pattern, s) => {
+const CodeMap = (input) => {
   // your solution here
 };
 
-console.log(codeMap("abba", "dog cat cat dog")); // true
-console.log(codeMap("abba", "dog cat cat fish")); // false
-console.log(codeMap("aaaa", "dog cat cat dog")); // false
+console.log(CodeMap("abba", "dog cat cat dog")); // true
+console.log(CodeMap("abba", "dog cat cat fish")); // false
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 21 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 12: Shared Start (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 17: The Odd One Out (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 20: Code Map (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 21 — Same Shape (Easy)
 // Topic: Bidirectional Mapping Variation
-// Builds On: Day 20 (bidirectional map) — same structure, applied to characters
-// ────────────────────────────────────────────────────────────
+// Builds On: Day 20 (bidirectional map) — same structure applied to characters
 /*
 Real World:
-  A font rendering engine determining whether two character
-  sets can be substituted one-for-one without collisions —
-  so one alphabet can be visually mapped to another.
+  A font rendering engine determining whether two character sets can be substituted one-for-one without collisions so one alphabet can be visually mapped to another.
 
-Problem:
-  Given two strings s and t of the same length, determine
-  if they are isomorphic. Two strings are isomorphic if
-  the characters in s can be replaced consistently to get t.
-  No two characters may map to the same character, but a
-  character may map to itself.
+Conceptual Explanation:
+  Identical structure to the previous challenge but now both inputs are strings of the same length rather than a pattern and a list of words. At every position in the strings check whether the character in the first string has already been mapped to a different character in the second string, and whether the character in the second string has already been mapped back to a different character in the first string. Both directions must be consistent at every position.
+
+Input:
+  Two strings of equal length.
+
+Output:
+  True if the characters in the first string can be consistently replaced to produce the second string with no two characters mapping to the same target. False otherwise.
 
 Example:
-  Input:  s = "egg", t = "add"
+  Input:  'egg', 'add'
   Output: true
-  Conceptual Explanation:    e→a, g→d. Consistent.
+  Why:    e maps to a, g maps to d. Consistent in both directions.
 
-  Input:  s = "foo", t = "bar"
+  Input:  'foo', 'bar'
   Output: false
-  Conceptual Explanation:    o→a and o→r — o can't map to two different chars.
+  Why:    o would need to map to both a and r — impossible.
 
-  Input:  s = "paper", t = "title"
+  Input:  'paper', 'title'
   Output: true
+  Why:    p→t, a→i, e→l, r→e. All consistent.
 
 Constraints:
-  - 1 <= s.length <= 50000
-  - s.length === t.length
-  - Both strings consist of ASCII characters
+  - 1 <= string length <= 50000
+  - Both strings have the same length
+  - Consist of ASCII characters
 
 Hint:
-  Identical structure to Day 20 — two maps (s→t and t→s).
-  At each position, if s[i] is already mapped to a different
-  t[i], return false. Same for the reverse direction.
-  The two-direction check is what prevents many-to-one mappings.
+  Create two empty objects. Walk both strings simultaneously using the index. At each position check if the first string character is already mapped to something different than the current second string character — return false if so. Check the reverse direction as well. If both checks pass record both mappings and continue. Return true after completing the walk.
 */
 
-const sameShape = (s, t) => {
+const SameShape = (input) => {
   // your solution here
 };
 
-console.log(sameShape("egg", "add")); // true
-console.log(sameShape("foo", "bar")); // false
-console.log(sameShape("paper", "title")); // true
+console.log(SameShape("egg", "add")); // true
+console.log(SameShape("foo", "bar")); // false
 
 // ════════════════════════════════════════════════════════════
 //  WEEK 4 — Consolidation (Days 22–30)
-//
 //  Thread: Every problem pulls from at least two patterns
-//          you've already built. This week is about recognizing
-//          which tool fits, then applying it cleanly.
+//  already built. Recognize which tool fits, apply cleanly.
 // ════════════════════════════════════════════════════════════
-
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 22 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 13: Word Flip (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 18: Crowd Favorite (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 21: Same Shape (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 22 — Merge From Back (Easy)
-// Topic: Two Pointers — Starting From the End
+// Topic: Two Pointer — Starting From the End
 // Builds On: Day 4 (backward traversal) + Day 6 (two pointers)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  Merging two sorted contact lists into one without
-  allocating a third array — working in place from the back.
+  Merging two sorted contact lists into one without allocating a third array — working in place from the back.
 
-Problem:
-  You are given two sorted integer arrays nums1 and nums2.
-  nums1 has enough space at the end (filled with 0s) to
-  hold all elements of nums2. m is the number of real
-  elements in nums1, n is the length of nums2.
-  Merge nums2 into nums1 in place, in sorted order.
+Conceptual Explanation:
+  If you try to merge from the front you risk overwriting values in the first array that you still need. Starting from the back solves this. The first array has extra space at the end equal to the size of the second array. Place three pointers — one at the last real element of the first array, one at the last element of the second array, and one at the very last position of the first array including the extra space. Always compare what both front pointers point to and place the larger value at the back pointer position then advance the appropriate pointers.
+
+Input:
+  Two sorted arrays and the count of real elements in the first array. The first array has extra zero-filled space at the end to accommodate all elements from the second array.
+
+Output:
+  The first array modified in place containing all elements from both arrays in sorted order.
 
 Example:
-  Input:  nums1 = [1, 3, 5, 0, 0, 0], m = 3
-          nums2 = [2, 4, 6], n = 3
-  Output: [1, 2, 3, 4, 5, 6]
-  Conceptual Explanation:    Merging the two sorted arrays in place produces a fully sorted combined array.
+  Input:  [1,3,5,0,0,0] with m=3 and [2,4,6] with n=3
+  Output: [1,2,3,4,5,6]
+  Why:    Merged in place from the back.
 
 Constraints:
-  - nums1.length = m + n
-  - 0 <= m, n <= 200
+  - First array length equals m plus n
   - Both arrays are sorted in non-decreasing order
+  - 0 <= m, n <= 200
 
 Hint:
-  If you fill from the front, you overwrite elements you
-  still need. Fill from the back instead. Place three
-  pointers: one at index m-1 (end of real nums1), one at
-  n-1 (end of nums2), one at m+n-1 (end of nums1 total).
-  Always pick the larger of the two front candidates and
-  place it at the back pointer.
+  Set three pointers — one at index m minus one for the first array's real elements, one at index n minus one for the second array, and one at index m plus n minus one as the write position. While both source pointers are valid compare their values and write the larger to the write position then advance both the used source pointer and the write pointer backward. If the second array's pointer finishes first the remaining first array elements are already in place. If the first array's pointer finishes first copy the remaining second array elements.
 */
 
-const mergeFromBack = (nums1, m, nums2, n) => {
+const MergeFromBack = (nums) => {
   // your solution here
-  // modifies nums1 in place
 };
 
-const arr1 = [1, 3, 5, 0, 0, 0];
-mergeFromBack(arr1, 3, [2, 4, 6], 3);
-console.log(JSON.stringify(arr1)); // [1,2,3,4,5,6]
+const a = [1, 3, 5, 0, 0, 0];
+MergeFromBack(a, 3, [2, 4, 6], 3);
+console.log(JSON.stringify(a)); // [1,2,3,4,5,6]
 
-const arr2 = [1, 0];
-mergeFromBack(arr2, 1, [2], 1);
-console.log(JSON.stringify(arr2)); // [1,2]
-
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 23 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 14: In Order (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 19: Common Ground (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 22: Merge From Back (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 23 — Missing IDs (Easy)
 // Topic: Frequency Object + Index Range Reasoning
 // Builds On: Day 11 (two-pass frequency) + Day 2 (index as meaningful position)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A ticketing system detecting which seat numbers were
-  never assigned in a fully booked venue where every
-  seat from 1 to n should appear exactly once.
+  A ticketing system detecting which seat numbers were never assigned in a fully booked venue where every seat from 1 to n should appear exactly once.
 
-Problem:
-  Given an array of n integers where each value is between
-  1 and n (inclusive), some values appear twice and others
-  are missing. Return all the integers in range [1, n]
-  that do not appear in the array.
+Conceptual Explanation:
+  The values in the array are guaranteed to fall between 1 and the array's length. Build a Set or frequency object from all values present in the array. Then walk from 1 to the array's length checking each number. Any number in that range that is not in your Set is a missing value. Because Set lookups are constant time the entire process is linear.
+
+Input:
+  An array of integers where every value is between 1 and the array's length inclusive. Some values appear twice and some values are absent.
+
+Output:
+  An array of all integers in the range 1 to array length that do not appear in the input.
 
 Example:
-  Input:  [4, 3, 2, 7, 8, 2, 3, 1]
-  Output: [5, 6]
-  Conceptual Explanation:    Values 5 and 6 are missing from the array.
+  Input:  [4,3,2,7,8,2,3,1]
+  Output: [5,6]
+  Why:    Values 5 and 6 are absent from the array.
 
 Constraints:
-  - 1 <= nums.length <= 100000
-  - 1 <= nums[i] <= nums.length
+  - 1 <= array length <= 100000
+  - 1 <= each value <= array length
 
 Hint:
-  Build a Set or frequency object from the array.
-  Then walk from 1 to n and collect every number
-  not found in your Set. The Set lookup is O(1),
-  so the whole thing is O(n).
+  Build a Set from all values in the array. Then create an empty result array. Walk from 1 to the array's length inclusive. For each number if it is not in the Set add it to the result array. Return the result array.
 */
 
-const missingIDs = (nums) => {
+const MissingIDs = (nums) => {
   // your solution here
 };
 
-console.log(JSON.stringify(missingIDs([4, 3, 2, 7, 8, 2, 3, 1]))); // [5,6]
-console.log(JSON.stringify(missingIDs([1, 1]))); // [2]
+console.log(JSON.stringify(MissingIDs([4, 3, 2, 7, 8, 2, 3, 1]))); // [5,6]
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 24 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 15: Two Sum (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 20: Code Map (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 23: Missing IDs (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 24 — Uptime Streak (Easy)
 // Topic: Linear Scan with Counter + Max Tracker
 // Builds On: Day 5 (tracking running state) + Day 7 (reset vs extend logic)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A server monitoring dashboard measuring the longest
-  uninterrupted uptime streak — consecutive hours where
-  the server was fully operational (represented as 1s).
+  A server monitoring dashboard measuring the longest uninterrupted uptime streak — consecutive hours where the server was fully operational.
 
-Problem:
-  Given a binary array (containing only 0s and 1s),
-  return the maximum number of consecutive 1s.
+Conceptual Explanation:
+  Walk through the array once with two variables — a current streak counter and a maximum streak counter. When you encounter a one increment the current streak and check if it now beats the maximum. When you encounter a zero the streak is broken so reset the current streak to zero. The maximum variable never resets — it only ever grows. This is the same extend-or-reset pattern from the peak streak challenge applied to counting consecutive ones.
+
+Input:
+  A binary array containing only zeros and ones.
+
+Output:
+  The length of the longest consecutive sequence of ones.
 
 Example:
-  Input:  [1, 1, 0, 1, 1, 1]
+  Input:  [1,1,0,1,1,1]
   Output: 3
-  Conceptual Explanation:    The last three 1s form the longest streak.
+  Why:    The last three ones form the longest streak.
+
+  Input:  [0,0,0]
+  Output: 0
+  Why:    No ones present.
 
 Constraints:
-  - 1 <= nums.length <= 100000
-  - nums[i] is either 0 or 1
+  - 1 <= array length <= 100000
+  - Each value is 0 or 1
 
 Hint:
-  Two variables: currentStreak and maxStreak.
-  Walk forward. On a 1: increment currentStreak, update
-  maxStreak if currentStreak beats it. On a 0: reset
-  currentStreak to 0. Very similar rhythm to Day 7.
+  Initialize current streak and max streak both to zero. Walk every element. On a one increment current streak then update max streak if current streak is now larger. On a zero set current streak back to zero. Return max streak after the loop.
 */
 
-const uptimeStreak = (nums) => {
+const UptimeStreak = (nums) => {
   // your solution here
 };
 
-console.log(uptimeStreak([1, 1, 0, 1, 1, 1])); // 3
-console.log(uptimeStreak([1, 0, 1, 1, 0, 1])); // 2
-console.log(uptimeStreak([0, 0, 0])); // 0
+console.log(UptimeStreak([1, 1, 0, 1, 1, 1])); // 3
+console.log(UptimeStreak([0, 0, 0])); // 0
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 25 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 16: Repeat Check (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 21: Same Shape (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 24: Uptime Streak (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 25 — Sorted Squares (Easy)
 // Topic: Two Pointers — Fill Result Array From Back
 // Builds On: Day 22 (fill from back) + Day 8 (pointers moving inward)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A sensor data pipeline that squares all readings
-  (including negative ones) and needs the result
-  in sorted order without re-sorting from scratch.
+  A sensor data pipeline that squares all readings including negative ones and needs the result in sorted order without re-sorting from scratch.
 
-Problem:
-  Given an integer array sorted in non-decreasing order,
-  return an array of the squares of each number, also
-  in non-decreasing (sorted) order.
+Conceptual Explanation:
+  The input is sorted so the largest absolute values — and therefore the largest squares — are always at the two ends of the array, either the most negative or the most positive. Use two pointers starting at each end and moving inward. Create a result array of the same length. Fill the result array from back to front by always comparing the squares of both outer pointers and placing the larger one at the current back position then advancing that pointer inward.
+
+Input:
+  An integer array sorted in non-decreasing order which may contain negative values.
+
+Output:
+  An array of the squares of each number in non-decreasing sorted order.
 
 Example:
-  Input:  [-4, -1, 0, 3, 10]
-  Output: [0, 1, 9, 16, 100]
-  Conceptual Explanation:    Squaring each number and then sorting yields the squares in non-decreasing order.
+  Input:  [-4,-1,0,3,10]
+  Output: [0,1,9,16,100]
+  Why:    Largest squares at the ends: 100 then 16 then 9 then 1 then 0.
 
 Constraints:
-  - 1 <= nums.length <= 10000
-  - -10000 <= nums[i] <= 10000
+  - 1 <= array length <= 10000
+  - -10000 <= each value <= 10000
   - Array is sorted in non-decreasing order
 
 Hint:
-  The largest squares are always at the two ends
-  (the most negative or the most positive numbers).
-  Two pointers from each end, fill a result array
-  from the back (index n-1 down to 0). At each step,
-  compare the squares of both ends and place the larger
-  one at the current back position.
+  Create a result array of the same length. Set left to index zero and right to the last index. Set a write position to the last index. While left is less than or equal to right compare the absolute values of the elements at both pointers. Square the larger absolute value and place it at the write position. Advance the pointer whose element was used inward and decrement the write position. Return the result array.
 */
 
-const sortedSquares = (nums) => {
+const SortedSquares = (nums) => {
   // your solution here
 };
 
-console.log(JSON.stringify(sortedSquares([-4, -1, 0, 3, 10]))); // [0,1,9,16,100]
-console.log(JSON.stringify(sortedSquares([-7, -3, 2, 3, 11]))); // [4,9,9,49,121]
+console.log(JSON.stringify(SortedSquares([-4, -1, 0, 3, 10]))); // [0,1,9,16,100]
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 26 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 17: The Odd One Out (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 22: Merge From Back (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 25: Sorted Squares (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 26 — Spot the Addition (Easy)
 // Topic: Frequency Differential
 // Builds On: Day 10 (frequency object) + Day 17 (XOR as an alternative)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A file sync tool detecting the single character that was
-  inserted when a string was shuffled and one character
-  was added to produce a longer version.
+  A file sync tool detecting the single character that was inserted when a string was shuffled and one extra character was added to produce a longer version.
 
-Problem:
-  You are given two strings s and t. String t is generated
-  by randomly shuffling s and then adding one extra character
-  at a random position. Find and return the added character.
+Conceptual Explanation:
+  Two approaches both work here. The frequency approach builds a tally from the first string and then walks the second string decrementing counts. The character whose count drops below zero or does not exist is the added one. The XOR approach treats all characters from both strings as a single collection and XORs them all together — every character that appears in both strings cancels out leaving only the extra character. Both approaches are worth implementing to deepen your understanding of both patterns.
+
+Input:
+  Two strings where the second is produced by shuffling the first and inserting one extra character.
+
+Output:
+  The single character that was added.
 
 Example:
-  Input:  s = "abcd", t = "abcde"
-  Output: "e"
-  Conceptual Explanation: String t has one extra character "e" that is not in s, so the answer is "e".
+  Input:  'abcd', 'abcde'
+  Output: 'e'
+  Why:    e appears in the second string but not the first.
 
-  Input:  s = "ae", t = "aea"
-  Output: "a"
-  Conceptual Explanation: String t has one extra character "a" that is not present in s.
+  Input:  'ae', 'aea'
+  Output: 'a'
+  Why:    a appears once in the first string and twice in the second.
 
 Constraints:
-  - 0 <= s.length <= 1000
-  - t.length === s.length + 1
-  - s and t consist of lowercase English letters
+  - 0 <= first string length <= 1000
+  - Second string length is exactly first string length plus one
 
 Hint:
-  Approach 1 (frequency): Count characters in s with an
-  object. Walk t decrementing counts. The character that
-  goes below zero (or doesn't exist) is the added one.
-  Approach 2 (XOR): XOR all characters from both strings
-  together. Pairs cancel — you're left with the extra char.
-  Try both. Understand why both work.
+  Approach one — build a frequency object from the first string. Walk the second string and decrement counts. The character that goes negative or is missing is the answer. Approach two — XOR every character from both strings together. Matching pairs cancel to zero and the extra character remains. Implement both and understand why both produce the correct answer.
 */
 
-const spotTheAddition = (s, t) => {
+const SpottheAddition = (nums) => {
   // your solution here
 };
 
-console.log(spotTheAddition("abcd", "abcde")); // "e"
-console.log(spotTheAddition("ae", "aea")); // "a"
+console.log(SpottheAddition("abcd", "abcde")); // 'e'
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 27 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 18: Crowd Favorite (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 23: Missing IDs (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 26: Spot the Addition (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 27 — Budget Check (Easy)
 // Topic: Character Budget Deduction
-// Builds On: Day 10 (frequency object) — now you deplete a budget as you consume
-// ────────────────────────────────────────────────────────────
+// Builds On: Day 10 (frequency object) — now depleting a budget as you consume
 /*
 Real World:
-  A content moderation tool verifying that a response
-  message can be constructed entirely using characters
-  available in a pre-approved template — not one character
-  more than the template provides.
+  A content moderation tool verifying that a response message can be constructed entirely using characters available in a pre-approved template.
 
-Problem:
-  Given two strings ransomNote and magazine, return true
-  if ransomNote can be constructed using the letters from
-  magazine. Each letter in magazine can only be used once.
+Conceptual Explanation:
+  Think of the magazine as a character budget. Build a frequency count of every character available in the magazine. Then walk through the ransom note and for each character decrement its count in the budget. If a character's count reaches below zero that character has been used more times than the magazine provides — it is impossible to construct the note. If you complete the walk without going negative the note can be constructed.
+
+Input:
+  Two strings — a ransom note to construct and a magazine to take characters from.
+
+Output:
+  True if the ransom note can be built using only characters from the magazine, each used at most as many times as it appears. False otherwise.
 
 Example:
-  Input:  ransomNote = "aa", magazine = "aab"
+  Input:  'aa', 'aab'
   Output: true
-  Conceptual Explanation: Magazine has two 'a's and one 'b'; ransomNote can be fully constructed using them.
+  Why:    Two a's available in the magazine — enough for the note.
 
-  Input:  ransomNote = "aa", magazine = "ab"
+  Input:  'aa', 'ab'
   Output: false
-  Conceptual Explanation: Magazine has only one 'a', but ransomNote requires two 'a's, so construction is impossible.
+  Why:    Only one a in the magazine but the note needs two.
 
 Constraints:
-  - 1 <= ransomNote.length, magazine.length <= 100000
-  - Both strings consist of lowercase English letters
+  - 1 <= each string length <= 100000
+  - Both consist of lowercase English letters
 
 Hint:
-  Build a frequency object from magazine (your budget).
-  Walk ransomNote. For each character, decrement its count
-  in the budget. If a count goes below 0 (or the key doesn't
-  exist), you've run out of that letter — return false.
+  Build a frequency object from the magazine counting every character. Walk the ransom note. For each character decrement its count in the frequency object. If the count for any character goes below zero return false — the budget is exhausted. Return true if you complete the walk without going negative.
 */
 
-const budgetCheck = (ransomNote, magazine) => {
+const BudgetCheck = (input) => {
   // your solution here
 };
 
-console.log(budgetCheck("aa", "aab")); // true
-console.log(budgetCheck("aa", "ab")); // false
-console.log(budgetCheck("bg", "edfbgill")); // true
+console.log(BudgetCheck("aa", "aab")); // true
+console.log(BudgetCheck("aa", "ab")); // false
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 28 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 19: Common Ground (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 24: Uptime Streak (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 27: Budget Check (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 28 — Pair Counter (Easy)
 // Topic: Complement Lookup in Frequency Object
 // Builds On: Day 15 (complement in a map) — now count all valid pairs
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A matchmaking engine counting how many player pairs in
-  a roster have exactly K rating points between them —
-  to form balanced competition brackets.
+  A matchmaking engine counting how many player pairs in a roster have exactly K rating points between them to form balanced competition brackets.
 
-Problem:
-  Given an integer array nums and an integer k, return the
-  number of pairs (i, j) where i < j and
-  Math.abs(nums[i] - nums[j]) === k.
+Conceptual Explanation:
+  Build a frequency object first so you know how many times each number appears. Then for every unique number in the array check whether that number plus K also exists in the frequency object. If it does multiply the count of the current number by the count of the paired number — that product is how many distinct pairs that combination produces. Sum all such products. Using a frequency object means each pair is found in constant time rather than requiring nested loops.
+
+Input:
+  An array of integers and a positive integer K.
+
+Output:
+  The count of pairs where the absolute difference between the two values equals exactly K.
 
 Example:
-  Input:  nums = [1, 2, 2, 1], k = 1
+  Input:  [1,2,2,1], k=1
   Output: 4
-  Conceptual Explanation:    Pairs: (0,1), (0,2), (3,1), (3,2) all have diff of 1.
+  Why:    Pairs: (1,2) at indices (0,1), (0,2), (3,1), (3,2). Four total.
 
-  Input:  nums = [1, 3, 2, 2], k = 2
+  Input:  [1,3,2,2], k=2
   Output: 1
-  Conceptual Explanation:    Only (0,1): |1-3|=2.
+  Why:    Only the pair (1,3) has a difference of 2.
 
 Constraints:
-  - 1 <= nums.length <= 200
-  - 1 <= nums[i] <= 100
+  - 1 <= array length <= 200
+  - 1 <= each value <= 100
   - 1 <= k <= 99
 
 Hint:
-  Build a frequency object first. Then for each unique
-  number n in the object, check if n+k exists. If it does,
-  multiply the counts together — that's how many pairs
-  that combination produces. Sum all such products.
+  Build a frequency object from the array. Then walk through every unique key in the object. For each key check if the key plus K also exists as a key. If it does multiply their counts and add the product to your running total. Return the total after checking all keys.
 */
 
-const pairCounter = (nums, k) => {
+const PairCounter = (nums) => {
   // your solution here
 };
 
-console.log(pairCounter([1, 2, 2, 1], 1)); // 4
-console.log(pairCounter([1, 3, 2, 2], 2)); // 1
+console.log(PairCounter([1, 2, 2, 1], 1)); // 4
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 29 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 20: Code Map (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 25: Sorted Squares (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 28: Pair Counter (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 29 — Same Message (Easy)
 // Topic: Array Join + String Comparison
 // Builds On: Day 13 (join) — now comparing two joined results
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A document diff tool checking whether two differently-
-  chunked versions of the same file (split by paragraph,
-  line, or word) actually represent the same full text.
+  A document diff tool checking whether two differently-chunked versions of the same file actually represent the same full text.
 
-Problem:
-  Given two arrays of strings word1 and word2, return true
-  if the two arrays represent the same string when
-  concatenated in order.
+Conceptual Explanation:
+  Both arrays represent the same full string if when you concatenate all their elements in order the resulting strings are identical. Join each array with no separator to produce the full string each array represents. Then compare the two resulting strings directly. This works because concatenation is associative — the order of joining does not matter as long as the individual elements are in order.
+
+Input:
+  Two arrays of strings.
+
+Output:
+  True if concatenating all strings in the first array produces the same result as concatenating all strings in the second array. False otherwise.
 
 Example:
-  Input:  word1 = ["ab", "c"], word2 = ["a", "bc"]
+  Input:  ["ab","c"], ["a","bc"]
   Output: true
-  Conceptual Explanation:    "ab"+"c" = "abc" and "a"+"bc" = "abc"
+  Why:    "ab"+"c" = "abc" and "a"+"bc" = "abc". Identical.
 
-  Input:  word1 = ["a", "cb"], word2 = ["ab", "c"]
+  Input:  ["a","cb"], ["ab","c"]
   Output: false
+  Why:    "acb" does not equal "abc".
 
 Constraints:
-  - 1 <= word1.length, word2.length <= 1000
-  - 1 <= word1[i].length, word2[j].length <= 1000
+  - 1 <= each array length <= 1000
+  - 1 <= each string length <= 1000
 
 Hint:
-  One line with the right array method — join both arrays
-  with no separator and compare. Understand what you're
-  actually comparing and why join with "" works here.
+  Join the first array with an empty string separator to produce one combined string. Join the second array the same way. Compare the two resulting strings and return whether they are equal.
 */
 
-const sameMessage = (word1, word2) => {
+const SameMessage = (input) => {
   // your solution here
 };
 
-console.log(sameMessage(["ab", "c"], ["a", "bc"])); // true
-console.log(sameMessage(["a", "cb"], ["ab", "c"])); // false
-console.log(sameMessage(["abc", "d", "defg"], ["abcddefg"])); // true
+console.log(SameMessage(["ab", "c"], ["a", "bc"])); // true
 
-// ────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────
+// ─── REVISION CHECK — Day 30 ─────────────────────────────────────
+// ⚠️  Complete these revisions BEFORE attempting today's challenge:
+//
+//     → Revision 3/3 — Day 21: Same Shape (+9 days)
+//       File: month1_revisions.js
+//     → Revision 2/3 — Day 26: Spot the Addition (+4 days)
+//       File: month1_revisions.js
+//     → Revision 1/3 — Day 29: Same Message (+1 day)
+//       File: month1_revisions.js
+//
+// After each revision complete the Feynman Checkpoint in the revision file.
+// ✅ Return here only after ALL revisions and checkpoints are done.
+// ─────────────────────────────────────────────────────────────────────
 // Day 30 — Compress Ranges (Easy)
 // Topic: Linear Scan with Range Detection
 // Builds On: Day 7 (extend or reset) + Day 12 (building a result string)
-// ────────────────────────────────────────────────────────────
 /*
 Real World:
-  A calendar app that compresses a list of individually
-  booked days into human-readable ranges like "Mon-Fri"
-  rather than listing every day separately.
+  A calendar app that compresses a list of individually booked days into human-readable ranges rather than listing every day separately.
 
-Problem:
-  Given a sorted array of unique integers, return the
-  smallest sorted list of range strings that covers
-  all numbers exactly. A range "a->b" covers a through b
-  (inclusive). A single number is just "a".
+Conceptual Explanation:
+  Walk through the sorted array tracking the start of the current range. A range ends when the next element is not exactly one more than the current element or when you reach the end of the array. At that point build the range label — if the start and current position are the same it is a single number otherwise it is start arrow end. Then begin a new range at the next element. The extend-or-reset logic mirrors the streak counting from previous challenges.
+
+Input:
+  A sorted array of unique integers.
+
+Output:
+  An array of strings where consecutive integers are compressed into range notation and single integers appear alone.
 
 Example:
-  Input:  [0, 1, 2, 4, 5, 7]
-  Output: ["0->2", "4->5", "7"]
-  Conceptual Explanation:    0,1,2 are consecutive → "0->2". 4,5 → "4->5". 7 alone → "7".
+  Input:  [0,1,2,4,5,7]
+  Output: ["0->2","4->5","7"]
+  Why:    0 through 2 consecutive, 4 through 5 consecutive, 7 alone.
 
-  Input:  [0, 2, 3, 4, 6, 8, 9]
-  Output: ["0", "2->4", "6", "8->9"]
+  Input:  [0,2,3,4,6,8,9]
+  Output: ["0","2->4","6","8->9"]
+  Why:    0 alone, 2 through 4 consecutive, 6 alone, 8 through 9 consecutive.
 
 Constraints:
-  - 0 <= nums.length <= 20
-  - -1000000000 <= nums[i] <= 1000000000
-  - All values are unique and sorted
+  - 0 <= array length <= 20
+  - -1000000000 <= each value <= 1000000000
+  - All values unique and sorted
 
 Hint:
-  Track the start of each range. Walk forward.
-  A range ends when the next number is not exactly
-  current + 1 (or you've reached the end of the array).
-  At that point, build the label: if start === end, just
-  the number; otherwise "start->end". Then begin a new range.
+  Handle the empty array case first. Track the start of the current range. Walk from the second element to the end. At each position if the current value is not exactly one more than the previous value the range has ended — build the label using the stored start and the previous element then start a new range at the current element. After the loop close the final range. Return the collected labels.
 */
 
-const compressRanges = (nums) => {
+const CompressRanges = (input) => {
   // your solution here
 };
 
-console.log(JSON.stringify(compressRanges([0, 1, 2, 4, 5, 7]))); // ["0->2","4->5","7"]
-console.log(JSON.stringify(compressRanges([0, 2, 3, 4, 6, 8, 9]))); // ["0","2->4","6","8->9"]
-console.log(JSON.stringify(compressRanges([]))); // []
+console.log(JSON.stringify(CompressRanges([0, 1, 2, 4, 5, 7]))); // ['0->2','4->5','7']
